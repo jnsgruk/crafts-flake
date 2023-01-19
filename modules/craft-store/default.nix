@@ -1,11 +1,11 @@
 {
   pkgs,
   lib,
-  overrides,
   pydantic,
   ...
 }: let
-  macaroonbakery = pkgs.callPackage ./macaroon-bakery.nix {};
+  macaroon-bakery = pkgs.callPackage ../deps/macaroon-bakery.nix {};
+  overrides = pkgs.callPackage ../deps/overrides.nix {};
 in
   pkgs.python3Packages.buildPythonPackage rec {
     pname = "craft-store";
@@ -20,7 +20,7 @@ in
 
     propagatedBuildInputs =
       [
-        macaroonbakery
+        macaroon-bakery
         overrides
         pydantic
       ]

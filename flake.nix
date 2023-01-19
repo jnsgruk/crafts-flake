@@ -17,10 +17,23 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
+
         charmcraft = pkgs.callPackage ./modules/charmcraft {};
+        # TODO: Uncomment once the Pydantic overlay is used properly
+        # craft-cli = pkgs.callPackage ./modules/craft-cli.nix {};
+        # craft-parts = pkgs.callPackage ./modules/craft-parts.nix {};
+        # craft-providers = pkgs.callPackage ./modules/craft-providers {};
+        # craft-store = pkgs.callPackage ./modules/craft-store {};
       in rec {
         packages = {
           charmcraft = charmcraft;
+
+          # TODO: Uncomment once the Pydantic overlay is used properly
+          # craft-cli = craft-cli;
+          # craft-parts = craft-parts;
+          # craft-providers = craft-providers;
+          # craft-store = craft-store;
+
           default = packages.charmcraft;
         };
 

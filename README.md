@@ -13,3 +13,10 @@ $ git clone https://github.com/jnsgruk/crafts-flake
 $ cd crafts-flake
 $ nix run
 ```
+
+## TODO
+
+- [ ] Use a flake-wide overlay for Pydantic, unthread argument passing throughout
+- [ ] Fix race condition in Charmcraft that occurs when starting a LXD container
+- [ ] Add Starcraft support
+- [ ] Add Rockcraft support

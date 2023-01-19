@@ -21,23 +21,13 @@
     };
   };
 
-  snap-helpers = pkgs.callPackage ./deps/snap-helpers.nix {};
-  overrides = pkgs.callPackage ./deps/overrides.nix {};
-  pydantic-yaml = pkgs.callPackage ./deps/pydantic-yaml.nix {pydantic = overlay.pkgs.pydantic;};
-
-  craft-cli = pkgs.callPackage ./deps/craft-cli.nix {pydantic = overlay.pkgs.pydantic;};
-  craft-providers = pkgs.callPackage ./deps/craft-providers {pydantic = overlay.pkgs.pydantic;};
-
-  craft-parts = pkgs.callPackage ./deps/craft-parts.nix {
-    overrides = overrides;
-    pydantic = overlay.pkgs.pydantic;
-    pydantic-yaml = pydantic-yaml;
-  };
-
-  craft-store = pkgs.callPackage ./deps/craft-store {
-    pydantic = overlay.pkgs.pydantic;
-    overrides = overrides;
-  };
+  snap-helpers = pkgs.callPackage ../deps/snap-helpers.nix {};
+  overrides = pkgs.callPackage ../deps/overrides.nix {};
+  pydantic-yaml = pkgs.callPackage ../deps/pydantic-yaml.nix {pydantic = overlay.pkgs.pydantic;};
+  craft-cli = pkgs.callPackage ../craft-cli.nix {pydantic = overlay.pkgs.pydantic;};
+  craft-providers = pkgs.callPackage ../craft-providers {pydantic = overlay.pkgs.pydantic;};
+  craft-parts = pkgs.callPackage ../craft-parts.nix {pydantic = overlay.pkgs.pydantic;};
+  craft-store = pkgs.callPackage ../craft-store {pydantic = overlay.pkgs.pydantic;};
 in
   pkgs.python3Packages.buildPythonApplication {
     pname = pname;
