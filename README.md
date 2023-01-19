@@ -2,7 +2,7 @@
 
 > This is very much a work-in-progress!
 
-An experimental nix flake for the Canonical ⭐craft suote of tools.
+An experimental nix flake for the Canonical ⭐craft suite of tools.
 
 ## Quick start
 

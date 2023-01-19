@@ -20,13 +20,13 @@
         charmcraft = pkgs.callPackage ./modules/charmcraft {};
       in rec {
         packages = {
-          pythonPkg = charmcraft;
-          default = packages.pythonPkg;
+          charmcraft = charmcraft;
+          default = packages.charmcraft;
         };
 
         apps.default = {
           type = "app";
-          program = "${packages.pythonPkg}/bin/charmcraft";
+          program = "${packages.charmcraft}/bin/charmcraft";
         };
       }
     );
