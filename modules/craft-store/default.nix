@@ -1,11 +1,12 @@
 {
   pkgs,
   lib,
-  pydantic,
+  outputs,
   ...
 }: let
   macaroon-bakery = pkgs.callPackage ../deps/macaroon-bakery.nix {};
   overrides = pkgs.callPackage ../deps/overrides.nix {};
+  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
 in
   pkgs.python3Packages.buildPythonPackage rec {
     pname = "craft-store";

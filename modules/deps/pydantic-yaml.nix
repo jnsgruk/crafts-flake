@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  pydantic,
+  outputs,
   ...
 }: let
   types-deprecated = pkgs.python3Packages.buildPythonPackage rec {
@@ -13,6 +13,8 @@
       sha256 = "sha256-4EzliSlQmGU1npHcw4cgEjJitM1o+iqKkDEtUDkLtvo=";
     };
   };
+
+  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
 in
   pkgs.python3Packages.buildPythonPackage rec {
     pname = "pydantic_yaml";

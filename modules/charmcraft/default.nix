@@ -1,33 +1,17 @@
 {
   pkgs,
   lib,
+  outputs,
   ...
 }: let
   pname = "charmcraft";
   version = "2.2.0";
 
-  overlay = pkgs.python3.override {
-    packageOverrides = self: super: {
-      pydantic = super.pydantic.overridePythonAttrs (old: rec {
-        pname = "pydantic";
-        version = "1.9.0";
-        src = pkgs.fetchFromGitHub {
-          owner = "samuelcolvin";
-          repo = pname;
-          rev = "refs/tags/v${version}";
-          sha256 = "sha256-C4WP8tiMRFmkDkQRrvP3yOSM2zN8pHJmX9cdANIckpM=";
-        };
-      });
-    };
-  };
+  crafts = outputs.packages.${pkgs.system};
+
+  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
 
   snap-helpers = pkgs.callPackage ../deps/snap-helpers.nix {};
-  overrides = pkgs.callPackage ../deps/overrides.nix {};
-  pydantic-yaml = pkgs.callPackage ../deps/pydantic-yaml.nix {pydantic = overlay.pkgs.pydantic;};
-  craft-cli = pkgs.callPackage ../craft-cli.nix {pydantic = overlay.pkgs.pydantic;};
-  craft-providers = pkgs.callPackage ../craft-providers {pydantic = overlay.pkgs.pydantic;};
-  craft-parts = pkgs.callPackage ../craft-parts.nix {pydantic = overlay.pkgs.pydantic;};
-  craft-store = pkgs.callPackage ../craft-store {pydantic = overlay.pkgs.pydantic;};
 in
   pkgs.python3Packages.buildPythonApplication {
     pname = pname;
@@ -46,14 +30,13 @@ in
     ];
 
     propagatedBuildInputs =
-      [
+      (with crafts; [
         craft-cli
         craft-parts
         craft-providers
         craft-store
-        overlay.pkgs.pydantic
         snap-helpers
-      ]
+      ])
       ++ (with pkgs.python3Packages; [
         humanize
         jinja2
@@ -65,7 +48,8 @@ in
         requests-unixsocket
         setuptools-rust
         tabulate
-      ]);
+      ])
+      ++ [pydantic];
 
     # TODO: Try to make the tests pass and remove this.
     doCheck = false;

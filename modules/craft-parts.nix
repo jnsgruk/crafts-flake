@@ -1,11 +1,12 @@
 {
   pkgs,
   lib,
-  pydantic,
+  outputs,
   ...
 }: let
-  pydantic-yaml = pkgs.callPackage ./deps/pydantic-yaml.nix {pydantic = pydantic;};
+  pydantic-yaml = pkgs.callPackage ./deps/pydantic-yaml.nix {inherit outputs;};
   overrides = pkgs.callPackage ./deps/overrides.nix {};
+  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
 in
   pkgs.python3Packages.buildPythonPackage rec {
     pname = "craft-parts";
