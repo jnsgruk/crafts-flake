@@ -40,7 +40,10 @@ in
       sha256 = "sha256-D5G0CLLmrlVvqfA2sjuRtHX3BcfRj8w5boOlXz95ZGg=";
     };
 
-    patches = [./remove-cryptography-charmcraft.patch];
+    patches = [
+      ./remove-cryptography-charmcraft.patch
+      ./set-channel-for-nix.patch
+    ];
 
     propagatedBuildInputs =
       [

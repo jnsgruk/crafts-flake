@@ -17,7 +17,7 @@ pkgs.python3Packages.buildPythonPackage rec {
 
   patches = [
     ./lxd-socket-path.patch
-    ./ignore-host-snap.patch
+    ./no-inject-snap.patch
   ];
 
   propagatedBuildInputs = with pkgs.python3Packages;
