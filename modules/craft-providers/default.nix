@@ -8,13 +8,13 @@
 in
   pkgs.python3Packages.buildPythonPackage rec {
     pname = "craft-providers";
-    version = "1.7.0";
+    version = "1.7.1";
 
     src = pkgs.fetchFromGitHub {
       owner = "canonical";
       repo = "craft-providers";
       rev = "v${version}";
-      sha256 = "sha256-V9y6GFML/4vN5e3fJlWk4yZoXbjtNTimpYQBHbg5muA=";
+      sha256 = "sha256-PUYD8+aOP5AKdUDwQ8SWd8MM7gzLVsYNPhFM55P/7NY=";
     };
 
     patches = [
