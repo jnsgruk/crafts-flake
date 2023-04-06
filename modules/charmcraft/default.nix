@@ -29,6 +29,14 @@ pkgs.python3Packages.buildPythonApplication {
     ./set-channel-for-nix.patch
   ];
 
+  postPatch = ''
+    substituteInPlace \
+      charmcraft/__init__.py \
+      --replace \
+      'from .version import version as __version__  # noqa: F401 (imported but unused)' \
+      '__version__ = "${version}"'
+  '';
+
   propagatedBuildInputs =
     (with crafts; [
       craft-cli
