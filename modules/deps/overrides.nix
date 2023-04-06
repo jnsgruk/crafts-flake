@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }:
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "overrides";
@@ -18,6 +17,6 @@ pkgs.python3Packages.buildPythonPackage rec {
     description = "A decorator @override that verifies that a method that should override an inherited method actually does it.";
     homepage = "https://github.com/mkorpela/overrides";
     license = licenses.asl20;
-    maintainers = with maintainers; [jnsgruk];
+    maintainers = with maintainers; [ jnsgruk ];
   };
 }

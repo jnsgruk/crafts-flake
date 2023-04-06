@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }:
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "snap-helpers";
@@ -23,6 +22,6 @@ pkgs.python3Packages.buildPythonPackage rec {
     description = "Interact with snap configuration and properties from inside a snap.";
     homepage = "https://github.com/albertodonato/snap-helpers";
     license = licenses.lgpl3;
-    maintainers = with maintainers; [jnsgruk];
+    maintainers = with maintainers; [ jnsgruk ];
   };
 }

@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }:
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "macaroonbakery";
@@ -26,6 +25,6 @@ pkgs.python3Packages.buildPythonPackage rec {
     description = "A Python library for working with macaroons.";
     homepage = "https://github.com/go-macaroon-bakery/py-macaroon-bakery";
     license = licenses.lgpl3;
-    maintainers = with maintainers; [jnsgruk];
+    maintainers = with maintainers; [ jnsgruk ];
   };
 }

@@ -1,4 +1,4 @@
-{pkgs}:
+{ pkgs }:
 pkgs.python3.override {
   packageOverrides = self: super: {
     pydantic = super.pydantic.overridePythonAttrs (old: rec {
