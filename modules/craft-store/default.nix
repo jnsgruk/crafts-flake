@@ -1,14 +1,7 @@
 { pkgs
 , lib
-, outputs
 , ...
-}:
-let
-  macaroon-bakery = pkgs.callPackage ../deps/macaroon-bakery.nix { };
-  overrides = pkgs.callPackage ../deps/overrides.nix { };
-  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
-in
-pkgs.python3Packages.buildPythonPackage rec {
+}: pkgs.python3Packages.buildPythonPackage rec {
   pname = "craft-store";
   version = "2.3.0";
 
@@ -19,17 +12,14 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-XPPZKhWQwedOo7rpY8WL/UfnNbaH4afL+BJub30owTg=";
   };
 
-  propagatedBuildInputs =
-    [
-      macaroon-bakery
-      overrides
-      pydantic
-    ]
-    ++ (with pkgs.python3Packages; [
-      keyring
-      requests
-      requests-toolbelt
-    ]);
+  propagatedBuildInputs = with pkgs.python3Packages; [
+    keyring
+    macaroon-bakery
+    overrides
+    pydantic
+    requests
+    requests-toolbelt
+  ];
 
   doCheck = false;
 

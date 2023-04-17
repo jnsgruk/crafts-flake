@@ -1,22 +1,7 @@
 { pkgs
 , lib
-, outputs
 , ...
-}:
-let
-  types-deprecated = pkgs.python3Packages.buildPythonPackage rec {
-    pname = "types-Deprecated";
-    version = "1.2.9";
-
-    src = pkgs.python3Packages.fetchPypi {
-      inherit pname version;
-      sha256 = "sha256-4EzliSlQmGU1npHcw4cgEjJitM1o+iqKkDEtUDkLtvo=";
-    };
-  };
-
-  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
-in
-pkgs.python3Packages.buildPythonPackage rec {
+}: pkgs.python3Packages.buildPythonPackage rec {
   pname = "pydantic_yaml";
   version = "0.9.0";
 
@@ -25,15 +10,12 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-Jtldg9Z2j8f4CyJjUNujql3J9SwTBhaVFx6Nnny0z0o=";
   };
 
-  propagatedBuildInputs = with pkgs.python3Packages;
-    [
-      deprecated
-      semver
-    ]
-    ++ [
-      pydantic
-      types-deprecated
-    ];
+  propagatedBuildInputs = with pkgs.python3Packages; [
+    deprecated
+    pydantic
+    semver
+    types-deprecated
+  ];
 
   doCheck = false;
 

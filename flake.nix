@@ -1,46 +1,70 @@
 {
   description = "⭐craft applications and libraries flake";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-  };
-
   outputs =
     { self
     , nixpkgs
-    , flake-utils
     , ...
     }:
     let
-      inherit (self) outputs;
-      pythonVersion = "python39";
+      supportedSystems = [
+        "x86_64-linux"
+        # "aarch64-linux"
+        # "x86_64-darwin"
+        # "aarch64-darwin"
+      ];
+
+      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
+
+      pkgsForSystem = system: (import nixpkgs {
+        inherit system;
+        overlays = [ self.overlay ];
+      });
     in
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      rec {
-        packages = {
-          charmcraft = pkgs.callPackage ./modules/charmcraft { inherit outputs; };
+    rec {
+      overlay = final: prev: rec {
+        pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
+          (python-final: python-prev: {
+            macaroon-bakery = python-final.callPackage ./modules/deps/macaroon-bakery.nix { };
+            overrides = python-final.callPackage ./modules/deps/overrides.nix { };
+            pydantic-yaml = python-final.callPackage ./modules/deps/pydantic-yaml.nix { };
+            snap-helpers = python-final.callPackage ./modules/deps/snap-helpers.nix { };
+            types-deprecated = python-final.callPackage ./modules/deps/types-deprecated.nix { };
 
-          craft-cli = pkgs.callPackage ./modules/craft-cli.nix { inherit outputs; };
-          craft-parts = pkgs.callPackage ./modules/craft-parts.nix { inherit outputs; };
-          craft-providers = pkgs.callPackage ./modules/craft-providers { inherit outputs; };
-          craft-store = pkgs.callPackage ./modules/craft-store { inherit outputs; };
+            pydantic = python-prev.pydantic.overridePythonAttrs (_: rec {
+              pname = "pydantic";
+              version = "1.9.0";
+              src = final.fetchFromGitHub {
+                owner = "samuelcolvin";
+                repo = pname;
+                rev = "refs/tags/v${version}";
+                sha256 = "sha256-C4WP8tiMRFmkDkQRrvP3yOSM2zN8pHJmX9cdANIckpM=";
+              };
+            });
+          })
+        ];
 
-          default = packages.charmcraft;
-        };
+        python3 =
+          let
+            self = prev.python3.override {
+              inherit self;
+              packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
+            };
+          in
+          self;
 
-        apps.default = {
-          type = "app";
-          program = "${packages.charmcraft}/bin/charmcraft";
-        };
+        python3Packages = final.python3.pkgs;
 
-        overlays = {
-          pydantic = import ./overlays/pydantic.nix { inherit pkgs; };
-        };
-      }
-    );
+        craft-cli = final.callPackage ./modules/craft-cli.nix { };
+        craft-parts = final.callPackage ./modules/craft-parts.nix { };
+        craft-providers = final.callPackage ./modules/craft-providers { };
+        craft-store = final.callPackage ./modules/craft-store { };
+
+        charmcraft = final.callPackage ./modules/charmcraft { };
+      };
+
+      packages = forAllSystems (system: {
+        inherit (pkgsForSystem system) charmcraft;
+      });
+    };
 }

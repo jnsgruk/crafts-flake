@@ -1,17 +1,10 @@
 { pkgs
 , lib
-, outputs
 , ...
 }:
 let
   pname = "charmcraft";
   version = "2.2.0";
-
-  crafts = outputs.packages.${pkgs.system};
-
-  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
-
-  snap-helpers = pkgs.callPackage ../deps/snap-helpers.nix { };
 in
 pkgs.python3Packages.buildPythonApplication {
   pname = pname;
@@ -37,27 +30,26 @@ pkgs.python3Packages.buildPythonApplication {
       '__version__ = "${version}"'
   '';
 
-  propagatedBuildInputs =
-    (with crafts; [
-      craft-cli
-      craft-parts
-      craft-providers
-      craft-store
-      snap-helpers
-    ])
-    ++ (with pkgs.python3Packages; [
-      humanize
-      jinja2
-      jsonschema
-      python-dateutil
-      pyyaml
-      requests
-      requests-toolbelt
-      requests-unixsocket
-      setuptools-rust
-      tabulate
-    ])
-    ++ [ pydantic ];
+  propagatedBuildInputs = (with pkgs; [
+    craft-cli
+    craft-parts
+    craft-providers
+    craft-store
+  ])
+  ++ (with pkgs.python3Packages; [
+    humanize
+    jinja2
+    jsonschema
+    pydantic
+    python-dateutil
+    pyyaml
+    requests
+    requests-toolbelt
+    requests-unixsocket
+    setuptools-rust
+    snap-helpers
+    tabulate
+  ]);
 
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;

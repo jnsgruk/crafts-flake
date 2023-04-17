@@ -1,12 +1,7 @@
 { pkgs
 , lib
-, outputs
 , ...
-}:
-let
-  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
-in
-pkgs.python3Packages.buildPythonPackage rec {
+}: pkgs.python3Packages.buildPythonPackage rec {
   pname = "craft-cli";
   version = "1.2.0";
 
@@ -17,12 +12,11 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-kNaAvuZarAq/qo7g9htd0Y65SQ/zjrbKmDSAfAj+ydw=";
   };
 
-  propagatedBuildInputs = with pkgs.python3Packages;
-    [
-      platformdirs
-      pyyaml
-    ]
-    ++ [ pydantic ];
+  propagatedBuildInputs = with pkgs.python3Packages; [
+    platformdirs
+    pydantic
+    pyyaml
+  ];
 
   doCheck = false;
 

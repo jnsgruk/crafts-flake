@@ -1,8 +1,7 @@
 { pkgs
 , lib
 , ...
-}:
-pkgs.python3Packages.buildPythonPackage rec {
+}: pkgs.python3Packages.buildPythonPackage rec {
   pname = "macaroonbakery";
   version = "1.3.1";
 

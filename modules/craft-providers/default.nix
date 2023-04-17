@@ -1,12 +1,7 @@
 { pkgs
 , lib
-, outputs
 , ...
-}:
-let
-  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
-in
-pkgs.python3Packages.buildPythonPackage rec {
+}: pkgs.python3Packages.buildPythonPackage rec {
   pname = "craft-providers";
   version = "1.7.1";
 
@@ -22,13 +17,12 @@ pkgs.python3Packages.buildPythonPackage rec {
     ./no-inject-snap.patch
   ];
 
-  propagatedBuildInputs = with pkgs.python3Packages;
-    [
-      pyyaml
-      requests
-      requests-unixsocket
-    ]
-    ++ [ pydantic ];
+  propagatedBuildInputs = with pkgs.python3Packages; [
+    pydantic
+    pyyaml
+    requests
+    requests-unixsocket
+  ];
 
   doCheck = false;
 

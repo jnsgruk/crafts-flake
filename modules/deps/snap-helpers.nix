@@ -1,8 +1,7 @@
 { pkgs
 , lib
 , ...
-}:
-pkgs.python3Packages.buildPythonPackage rec {
+}: pkgs.python3Packages.buildPythonPackage rec {
   pname = "snap-helpers";
   version = "0.3.2";
 

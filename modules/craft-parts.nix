@@ -1,14 +1,7 @@
 { pkgs
 , lib
-, outputs
 , ...
-}:
-let
-  pydantic-yaml = pkgs.callPackage ./deps/pydantic-yaml.nix { inherit outputs; };
-  overrides = pkgs.callPackage ./deps/overrides.nix { };
-  pydantic = outputs.overlays.${pkgs.system}.pydantic.pkgs.pydantic;
-in
-pkgs.python3Packages.buildPythonPackage rec {
+}: pkgs.python3Packages.buildPythonPackage rec {
   pname = "craft-parts";
   version = "1.17.1";
 
@@ -19,18 +12,15 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-Lo26q0HjytJaF7lcM/ltYqa5Yd1GDO+YqydOgS1sROU=";
   };
 
-  propagatedBuildInputs = with pkgs.python3Packages;
-    [
-      pyxdg
-      pyyaml
-      requests
-      requests-unixsocket
-    ]
-    ++ [
-      overrides
-      pydantic
-      pydantic-yaml
-    ];
+  propagatedBuildInputs = with pkgs.python3Packages;[
+    overrides
+    pydantic
+    pydantic-yaml
+    pyxdg
+    pyyaml
+    requests
+    requests-unixsocket
+  ];
 
   doCheck = false;
 
