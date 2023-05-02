@@ -3,13 +3,13 @@
 , ...
 }: pkgs.python3Packages.buildPythonPackage rec {
   pname = "craft-parts";
-  version = "1.17.1";
+  version = "1.19.3";
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
     repo = "craft-parts";
     rev = "v${version}";
-    sha256 = "sha256-Lo26q0HjytJaF7lcM/ltYqa5Yd1GDO+YqydOgS1sROU=";
+    sha256 = "sha256-CQKzZ5rhPku6wkANiknpZnNikFMmJE8jTelbwOgpxjg=";
   };
 
   propagatedBuildInputs = with pkgs.python3Packages;[
@@ -20,6 +20,7 @@
     pyyaml
     requests
     requests-unixsocket
+    types-pyyaml
   ];
 
   doCheck = false;

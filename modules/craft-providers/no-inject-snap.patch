@@ -1,18 +1,18 @@
-diff --git a/craft_providers/bases/buildd.py b/craft_providers/bases/buildd.py
-index f959629..d2fa5fe 100644
---- a/craft_providers/bases/buildd.py
-+++ b/craft_providers/bases/buildd.py
-@@ -22,6 +22,7 @@ import logging
- import os
+diff --git a/craft_providers/bases/ubuntu.py b/craft_providers/bases/ubuntu.py
+index 5af0fcc..e2d7cbc 100644
+--- a/craft_providers/bases/ubuntu.py
++++ b/craft_providers/bases/ubuntu.py
+@@ -20,6 +20,7 @@ import enum
+ import io
+ import logging
  import pathlib
- import re
 +import platform
+ import re
  import subprocess
  import sys
- import time
-@@ -550,7 +551,7 @@ class BuilddBase(Base):
+@@ -523,7 +524,7 @@ class BuilddBase(Base):
              )
- 
+
              # don't inject snaps on non-linux hosts
 -            if sys.platform != "linux" and not snap.channel:
 +            if (sys.platform != "linux"  or "NixOS" in platform.version()) and not snap.channel:

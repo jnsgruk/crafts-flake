@@ -34,17 +34,6 @@
             pydantic-yaml = python-final.callPackage ./modules/deps/pydantic-yaml.nix { };
             snap-helpers = python-final.callPackage ./modules/deps/snap-helpers.nix { };
             types-deprecated = python-final.callPackage ./modules/deps/types-deprecated.nix { };
-
-            pydantic = python-prev.pydantic.overridePythonAttrs (_: rec {
-              pname = "pydantic";
-              version = "1.9.0";
-              src = final.fetchFromGitHub {
-                owner = "samuelcolvin";
-                repo = pname;
-                rev = "refs/tags/v${version}";
-                sha256 = "sha256-C4WP8tiMRFmkDkQRrvP3yOSM2zN8pHJmX9cdANIckpM=";
-              };
-            });
           })
         ];
 

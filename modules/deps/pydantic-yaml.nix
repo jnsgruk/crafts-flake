@@ -3,15 +3,16 @@
 , ...
 }: pkgs.python3Packages.buildPythonPackage rec {
   pname = "pydantic_yaml";
-  version = "0.9.0";
+  version = "0.11.2";
 
   src = pkgs.python3Packages.fetchPypi {
     inherit pname version;
-    sha256 = "sha256-Jtldg9Z2j8f4CyJjUNujql3J9SwTBhaVFx6Nnny0z0o=";
+    sha256 = "sha256-GcjzyalwQbCj2PwGylFD/3HAhGxFs5/ecZz7yYvnoAw=";
   };
 
   propagatedBuildInputs = with pkgs.python3Packages; [
     deprecated
+    importlib-metadata
     pydantic
     semver
     types-deprecated

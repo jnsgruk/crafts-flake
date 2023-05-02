@@ -3,31 +3,30 @@
 , ...
 }:
 let
-  pname = "charmcraft";
-  version = "2.2.0";
+  name = "charmcraft";
+  version = "2.3.0";
 in
 pkgs.python3Packages.buildPythonApplication {
-  pname = pname;
+  name = name;
   version = version;
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
     repo = "charmcraft";
     rev = version;
-    sha256 = "sha256-D5G0CLLmrlVvqfA2sjuRtHX3BcfRj8w5boOlXz95ZGg=";
+    sha256 = "sha256-kkA7+5+SgsaKADw5F2X3HyPpIsp+aYFhG6S5drjOF9M=";
   };
 
   patches = [
-    ./remove-cryptography-charmcraft.patch
     ./set-channel-for-nix.patch
   ];
 
   postPatch = ''
     substituteInPlace \
-      charmcraft/__init__.py \
+      setup.py \
       --replace \
-      'from .version import version as __version__  # noqa: F401 (imported but unused)' \
-      '__version__ = "${version}"'
+      'version=determine_version()' \
+      'version="${version}"'
   '';
 
   propagatedBuildInputs = (with pkgs; [

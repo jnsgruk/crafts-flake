@@ -3,13 +3,14 @@
 , ...
 }: pkgs.python3Packages.buildPythonPackage rec {
   pname = "craft-store";
-  version = "2.3.0";
+  # Version 2.4.0 - no tag was created for this release
+  version = "d16851676d6ff632d063ed5e6199dc0d8aca93c7";
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
     repo = "craft-store";
     rev = version;
-    sha256 = "sha256-XPPZKhWQwedOo7rpY8WL/UfnNbaH4afL+BJub30owTg=";
+    sha256 = "sha256-i/d4EzrpFbv51z+qkCse7te0fIlotdBbGIjFsQwmzcw=";
   };
 
   propagatedBuildInputs = with pkgs.python3Packages; [

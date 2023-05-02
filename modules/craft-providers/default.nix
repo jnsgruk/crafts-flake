@@ -3,13 +3,13 @@
 , ...
 }: pkgs.python3Packages.buildPythonPackage rec {
   pname = "craft-providers";
-  version = "1.7.1";
+  version = "1.11.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
     repo = "craft-providers";
-    rev = "v${version}";
-    sha256 = "sha256-PUYD8+aOP5AKdUDwQ8SWd8MM7gzLVsYNPhFM55P/7NY=";
+    rev = "${version}";
+    sha256 = "sha256-ORwwHEYeqf50vwriGpGFQNl2XJQGITLoPu/ddoM02Jw=";
   };
 
   patches = [
