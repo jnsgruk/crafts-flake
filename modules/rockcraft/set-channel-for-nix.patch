@@ -1,0 +1,23 @@
+diff --git a/rockcraft/providers.py b/rockcraft/providers.py
+index 123639e..a229deb 100644
+--- a/rockcraft/providers.py
++++ b/rockcraft/providers.py
+@@ -19,6 +19,7 @@
+ 
+ import os
+ import sys
++import platform
+ from pathlib import Path
+ from typing import Dict, Optional
+ 
+@@ -104,8 +105,8 @@ def get_base_configuration(
+     # injecting a snap on a non-linux system is not supported, so default to
+     # install rockcraft from the store's stable channel
+     snap_channel = get_managed_environment_snap_channel()
+-    if sys.platform != "linux" and not snap_channel:
+-        snap_channel = "stable"
++    if snap_channel is None and (sys.platform != "linux" or "NixOS" in platform.version()):
++        snap_channel = "edge"
+ 
+     return bases.BuilddBase(
+         alias=alias,
