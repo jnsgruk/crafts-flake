@@ -10,10 +10,6 @@
     sha256 = "sha256-TXNLC8xsnsNNI4YhYzvS/6W0J3OwVcvgsY6SXh7gObk=";
   };
 
-  propagatedBuildInputs = with pkgs.python3Packages; [
-
-  ];
-
   doCheck = false;
 
   meta = with lib; {
