@@ -32,18 +32,16 @@ pkgs.python3Packages.buildPythonApplication {
       --replace 'craft-archives==0.0.3' 'craft-archives'
   '';
 
-  propagatedBuildInputs = (with pkgs; [
+  propagatedBuildInputs = with pkgs.python3Packages; [
+    attrs
+    catkin-pkg
+    click
     craft-archives
     craft-cli
     craft-grammar
     craft-parts
     craft-providers
     craft-store
-  ])
-  ++ (with pkgs.python3Packages; [
-    attrs
-    catkin-pkg
-    click
     debian
     gnupg
     jsonschema
@@ -62,7 +60,7 @@ pkgs.python3Packages.buildPythonApplication {
     snap-helpers
     tabulate
     tinydb
-  ]);
+  ];
 
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;

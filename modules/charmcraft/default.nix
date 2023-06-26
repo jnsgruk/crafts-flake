@@ -29,13 +29,11 @@ pkgs.python3Packages.buildPythonApplication {
       'version="${version}"'
   '';
 
-  propagatedBuildInputs = (with pkgs; [
+  propagatedBuildInputs = with pkgs.python3Packages; [
     craft-cli
     craft-parts
     craft-providers
     craft-store
-  ])
-  ++ (with pkgs.python3Packages; [
     humanize
     jinja2
     jsonschema
@@ -48,7 +46,7 @@ pkgs.python3Packages.buildPythonApplication {
     setuptools-rust
     snap-helpers
     tabulate
-  ]);
+  ];
 
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;

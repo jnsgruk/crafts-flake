@@ -29,16 +29,14 @@ pkgs.python3Packages.buildPythonApplication {
       'version="${version}"'
   '';
 
-  propagatedBuildInputs = (with pkgs; [
+  propagatedBuildInputs = with pkgs.python3Packages; [
     craft-archives
     craft-cli
     craft-parts
     craft-providers
-  ])
-  ++ (with pkgs.python3Packages; [
     gnupg
     spdx-lookup
-  ]);
+  ];
 
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;

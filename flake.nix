@@ -30,6 +30,12 @@
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
           (python-final: python-prev: {
             catkin-pkg = python-final.callPackage ./modules/deps/catkin-pkg.nix { };
+            craft-archives = final.callPackage ./modules/craft-archives.nix { };
+            craft-cli = final.callPackage ./modules/craft-cli.nix { };
+            craft-grammar = final.callPackage ./modules/craft-grammar.nix { };
+            craft-parts = final.callPackage ./modules/craft-parts.nix { };
+            craft-providers = final.callPackage ./modules/craft-providers { };
+            craft-store = final.callPackage ./modules/craft-store { };
             gnupg = python-final.callPackage ./modules/deps/gnupg.nix { };
             macaroon-bakery = python-final.callPackage ./modules/deps/macaroon-bakery.nix { };
             pydantic-yaml = python-final.callPackage ./modules/deps/pydantic-yaml.nix { };
@@ -51,12 +57,6 @@
 
         python3Packages = final.python3.pkgs;
 
-        craft-archives = final.callPackage ./modules/craft-archives.nix { };
-        craft-cli = final.callPackage ./modules/craft-cli.nix { };
-        craft-grammar = final.callPackage ./modules/craft-grammar.nix { };
-        craft-parts = final.callPackage ./modules/craft-parts.nix { };
-        craft-providers = final.callPackage ./modules/craft-providers { };
-        craft-store = final.callPackage ./modules/craft-store { };
 
         charmcraft = final.callPackage ./modules/charmcraft { };
         rockcraft = final.callPackage ./modules/rockcraft { };
