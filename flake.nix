@@ -29,6 +29,7 @@
       overlay = final: prev: rec {
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
           (python-final: python-prev: {
+            catkin-pkg = python-final.callPackage ./modules/deps/catkin-pkg.nix { };
             gnupg = python-final.callPackage ./modules/deps/gnupg.nix { };
             macaroon-bakery = python-final.callPackage ./modules/deps/macaroon-bakery.nix { };
             overrides = python-final.callPackage ./modules/deps/overrides.nix { };
@@ -53,16 +54,18 @@
 
         craft-archives = final.callPackage ./modules/craft-archives.nix { };
         craft-cli = final.callPackage ./modules/craft-cli.nix { };
+        craft-grammar = final.callPackage ./modules/craft-grammar.nix { };
         craft-parts = final.callPackage ./modules/craft-parts.nix { };
         craft-providers = final.callPackage ./modules/craft-providers { };
         craft-store = final.callPackage ./modules/craft-store { };
 
         charmcraft = final.callPackage ./modules/charmcraft { };
         rockcraft = final.callPackage ./modules/rockcraft { };
+        snapcraft = final.callPackage ./modules/snapcraft { };
       };
 
       packages = forAllSystems (system: {
-        inherit (pkgsForSystem system) charmcraft rockcraft;
+        inherit (pkgsForSystem system) charmcraft rockcraft snapcraft;
       });
     };
 }

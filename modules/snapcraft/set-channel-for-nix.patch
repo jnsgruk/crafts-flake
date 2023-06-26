@@ -1,0 +1,21 @@
+diff --git a/snapcraft/providers.py b/snapcraft/providers.py
+index a75ca9da..b0ea42d8 100644
+--- a/snapcraft/providers.py
++++ b/snapcraft/providers.py
+@@ -18,6 +18,7 @@
+ import io
+ import os
+ import sys
++import platform
+ from pathlib import Path
+ from textwrap import dedent
+ from typing import Dict, Optional
+@@ -176,7 +177,7 @@ def get_base_configuration(
+     # injecting a snap on a non-linux system is not supported, so default to
+     # install snapcraft from the store's stable channel
+     snap_channel = get_managed_environment_snap_channel()
+-    if sys.platform != "linux" and not snap_channel:
++    if snap_channel is None and (sys.platform != "linux" or "NixOS" in platform.version()):
+         emit.progress(
+             "Using snapcraft from snap store channel 'latest/stable' in instance "
+             "because snap injection is only supported on Linux hosts.",

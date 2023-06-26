@@ -15,6 +15,9 @@ $ nix run .#charmcraft
 
 # Run rockcraft
 $ nix run .#rockcraft
+
+# Run snapcraft
+$ nix run .#snapcraft
 ```
 
 ## TODO
@@ -22,4 +25,4 @@ $ nix run .#rockcraft
 - [x] Use a flake-wide overlay for Pydantic, unthread argument passing throughout
 - [x] Fix race condition in Charmcraft that occurs when starting a LXD container
 - [x] Add Rockcraft support
-- [ ] Add Starcraft support
+- [x] Add Starcraft support
