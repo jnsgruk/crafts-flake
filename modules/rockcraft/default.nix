@@ -40,11 +40,6 @@ pkgs.python3Packages.buildPythonApplication {
 
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;
-  # checkInputs = with pkgs.python3Packages; [
-  #   pytest
-  #   pytest-runner
-  #   responses
-  # ];
 
   meta = with lib; {
     description = "Tool to create OCI Images using the language from Snapcraft and Charmcraft.";

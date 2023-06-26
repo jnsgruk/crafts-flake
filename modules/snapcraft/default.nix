@@ -64,11 +64,6 @@ pkgs.python3Packages.buildPythonApplication {
 
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;
-  # checkInputs = with pkgs.python3Packages; [
-  #   pytest
-  #   pytest-runner
-  #   responses
-  # ];
 
   meta = with lib; {
     description = "Package, distribute, and update any app for Linux and IoT.";
