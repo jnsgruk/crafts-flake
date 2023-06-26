@@ -32,7 +32,6 @@
             catkin-pkg = python-final.callPackage ./modules/deps/catkin-pkg.nix { };
             gnupg = python-final.callPackage ./modules/deps/gnupg.nix { };
             macaroon-bakery = python-final.callPackage ./modules/deps/macaroon-bakery.nix { };
-            overrides = python-final.callPackage ./modules/deps/overrides.nix { };
             pydantic-yaml = python-final.callPackage ./modules/deps/pydantic-yaml.nix { };
             snap-helpers = python-final.callPackage ./modules/deps/snap-helpers.nix { };
             spdx = python-final.callPackage ./modules/deps/spdx.nix { };
