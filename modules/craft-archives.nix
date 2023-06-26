@@ -3,15 +3,23 @@
 , ...
 }: pkgs.python3Packages.buildPythonPackage rec {
   pname = "craft-archives";
-  version = "0.0.3";
+  version = "1.1.0";
   format = "pyproject";
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
     repo = "craft-archives";
     rev = "v${version}";
-    sha256 = "sha256-KtBiiBb1CgmHVlzaegvTEsVWXDKD3hu/uJPAKto671w=";
+    sha256 = "sha256-jyCTHuPS8qvPWMtvcY/GQK0NXlTObnyKHQzN2R1VikI=";
   };
+
+  postPatch = ''
+    substituteInPlace \
+      craft_archives/__init__.py \
+      --replace \
+      'dev' \
+      '${version}'
+  '';
 
   propagatedBuildInputs = with pkgs.python3Packages;[
     gnupg
@@ -20,7 +28,11 @@
     overrides
     pydantic
     setuptools
+    setuptools-scm
+    tabulate
   ];
+
+  SETUPTOOLS_SCM_PRETEND_VERSION = version;
 
   doCheck = false;
 

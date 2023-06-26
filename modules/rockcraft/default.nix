@@ -4,7 +4,7 @@
 }:
 let
   name = "rockcraft";
-  version = "2e0eddfb919558d5562969018bf12b688326fb89";
+  version = "c49a216714fa02eba58ff4270e2824fdab031fba";
 in
 pkgs.python3Packages.buildPythonApplication {
   name = name;
@@ -14,7 +14,7 @@ pkgs.python3Packages.buildPythonApplication {
     owner = "canonical";
     repo = "rockcraft";
     rev = version;
-    sha256 = "sha256-NduQKxxtB1WgixWpCdN5EZhHuBptmEqBeSnk7MwohLI=";
+    sha256 = "sha256-VeNplA9Ent82W/C0JCbcwoqQTywLF9CgpBAtQGrDQxc=";
   };
 
   patches = [
