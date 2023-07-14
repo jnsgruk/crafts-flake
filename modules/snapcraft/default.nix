@@ -3,11 +3,11 @@
 , ...
 }:
 let
-  name = "snapcraft";
+  pname = "snapcraft";
   version = "7.4.3";
 in
 pkgs.python3Packages.buildPythonApplication {
-  inherit name version;
+  inherit pname version;
 
   src = pkgs.fetchFromGitHub {
     owner = "snapcore";

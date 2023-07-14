@@ -3,11 +3,11 @@
 , ...
 }:
 let
-  name = "rockcraft";
+  pname = "rockcraft";
   version = "c49a216714fa02eba58ff4270e2824fdab031fba";
 in
 pkgs.python3Packages.buildPythonApplication {
-  inherit name version;
+  inherit pname version;
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";

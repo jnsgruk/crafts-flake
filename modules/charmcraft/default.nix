@@ -3,11 +3,11 @@
 , ...
 }:
 let
-  name = "charmcraft";
+  pname = "charmcraft";
   version = "2.3.0";
 in
 pkgs.python3Packages.buildPythonApplication {
-  inherit name version;
+  inherit pname version;
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
