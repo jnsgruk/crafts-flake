@@ -3,11 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
+    nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
+    nix-formatter-pack.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     { self
     , nixpkgs
+    , nix-formatter-pack
     , ...
     }:
     let
@@ -18,7 +22,7 @@
         # "aarch64-darwin"
       ];
 
-      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
       pkgsForSystem = system: (import nixpkgs {
         inherit system;
@@ -28,7 +32,7 @@
     rec {
       overlay = final: prev: rec {
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
-          (python-final: python-prev: {
+          (python-final: _python-prev: {
             catkin-pkg = python-final.callPackage ./modules/deps/catkin-pkg.nix { };
             craft-archives = final.callPackage ./modules/craft-archives.nix { };
             craft-cli = final.callPackage ./modules/craft-cli.nix { };
@@ -66,5 +70,16 @@
       packages = forAllSystems (system: {
         inherit (pkgsForSystem system) charmcraft rockcraft snapcraft;
       });
+
+      formatter = forAllSystems (system:
+        nix-formatter-pack.lib.mkFormatter {
+          pkgs = nixpkgs.legacyPackages.${system};
+          config.tools = {
+            deadnix.enable = true;
+            nixpkgs-fmt.enable = true;
+            statix.enable = true;
+          };
+        }
+      );
     };
 }
