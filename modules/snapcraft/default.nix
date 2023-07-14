@@ -1,5 +1,4 @@
-{ config
-, pkgs
+{ pkgs
 , lib
 , ...
 }:
@@ -8,8 +7,7 @@ let
   version = "7.4.3";
 in
 pkgs.python3Packages.buildPythonApplication {
-  name = name;
-  version = version;
+  inherit name version;
 
   src = pkgs.fetchFromGitHub {
     owner = "snapcore";

@@ -7,8 +7,7 @@ let
   version = "2.3.0";
 in
 pkgs.python3Packages.buildPythonApplication {
-  name = name;
-  version = version;
+  inherit name version;
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
