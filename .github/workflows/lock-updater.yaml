@@ -1,15 +1,13 @@
-name: Flake checker
+name: Flake lock updater
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
   schedule:
     - cron: '0 0 * * 0'
 
 jobs:
-  flake-checker:
+  lock-updater:
+    name: Flake lock updater
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout flake
@@ -21,5 +19,7 @@ jobs:
       - name: Setup magic-nix-cache
         uses: DeterminateSystems/magic-nix-cache-action@main
 
-      - name: Check flake inputs
-        uses: DeterminateSystems/flake-checker-action@v5
+      - name: Update flake lock file
+        uses: DeterminateSystems/update-flake-lock@v19
+        with:
+          pr-title: "chore: update flake lock file"
