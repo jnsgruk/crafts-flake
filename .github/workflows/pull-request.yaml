@@ -8,26 +8,6 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    strategy:
-        matrix:
-          package: ["charmcraft", "rockcraft", "snapcraft"]
-    steps:
-      - name: Checkout flake
-        uses: actions/checkout@v3
-
-      - name: Install nix
-        uses: DeterminateSystems/nix-installer-action@v4
-
-      - name: Setup magic-nix-cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
-      - name: Setup cachix
-        uses: cachix/cachix-action@v12
-        with:
-          name: jnsgruk
-          # If you chose API tokens for write access OR if you have a private cache
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-    
-      - name: Build ${{ matrix.package }}
-        run: nix build .#${{ matrix.package }}
+    uses: ./.github/workflows/build.yaml
+    secrets:
+      CACHIX_AUTH_TOKEN: "${{ secrets.CACHIX_AUTH_TOKEN }}"
