@@ -4,16 +4,17 @@
 }:
 let
   pname = "rockcraft";
-  version = "c49a216714fa02eba58ff4270e2824fdab031fba";
+  version = "unstable-2023-07-14";
+  rev = "ba21cbbba6a591a32ebbba9fe8e2260dde855311";
 in
 pkgs.python3Packages.buildPythonApplication {
-  inherit pname version;
+  inherit pname version rev;
 
   src = pkgs.fetchFromGitHub {
+    inherit rev;
     owner = "canonical";
     repo = "rockcraft";
-    rev = version;
-    sha256 = "sha256-VeNplA9Ent82W/C0JCbcwoqQTywLF9CgpBAtQGrDQxc=";
+    sha256 = "sha256-6lbSx5SY0cPMMTyVQLOOS5Og8HTUESq9qFUVZ7GjZ6Y=";
   };
 
   patches = [
@@ -22,10 +23,8 @@ pkgs.python3Packages.buildPythonApplication {
 
   postPatch = ''
     substituteInPlace \
-      setup.py \
-      --replace \
-      'version=determine_version()' \
-      'version="${version}"'
+      rockcraft/__init__.py \
+      --replace '__version__ = "0.0.1.dev1"' '__version__ = "0.0.1+g${builtins.substring 0 7 rev}"'
   '';
 
   propagatedBuildInputs = with pkgs.python3Packages; [
