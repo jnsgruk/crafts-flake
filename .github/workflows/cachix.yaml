@@ -2,10 +2,14 @@ name: "Cachix"
 
 on:
   push:
+    branches: [ main ]
 
 jobs:
-  cachix:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          package: ["charmcraft", "rockcraft", "snapcraft"]
     steps:
       - name: Checkout flake
         uses: actions/checkout@v3
@@ -22,6 +26,6 @@ jobs:
           name: jnsgruk
           # If you chose API tokens for write access OR if you have a private cache
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-
-      - name: Build packages
-        run: nix build .#charmcraft .#snapcraft .#rockcraft
+    
+      - name: Build ${{ matrix.package }}
+        run: nix build .#${{ matrix.package }}
