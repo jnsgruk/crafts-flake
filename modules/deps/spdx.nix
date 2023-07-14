@@ -12,10 +12,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "SPDX license list database";
     homepage = "https://github.com/bbqsrc/spdx-python";
-    license = licenses.bsd2;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.bsd2;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

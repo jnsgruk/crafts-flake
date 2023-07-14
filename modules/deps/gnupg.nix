@@ -22,10 +22,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "A modified version of python-gnupg.";
     homepage = "https://github.com/isislovecruft/python-gnupg";
-    license = licenses.gpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.gpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

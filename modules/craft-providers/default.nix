@@ -26,10 +26,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Python interfaces for instantiating and executing builds for a variety of target environments..";
     homepage = "https://github.com/canonical/craft-providers";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

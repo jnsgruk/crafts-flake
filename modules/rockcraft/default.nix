@@ -40,10 +40,10 @@ pkgs.python3Packages.buildPythonApplication {
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Tool to create OCI Images using the language from Snapcraft and Charmcraft.";
     homepage = "https://github.com/canonical/rockcraft";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

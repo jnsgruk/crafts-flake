@@ -17,10 +17,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Interact with snap configuration and properties from inside a snap.";
     homepage = "https://github.com/albertodonato/snap-helpers";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

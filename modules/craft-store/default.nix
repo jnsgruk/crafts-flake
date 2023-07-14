@@ -24,10 +24,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Python interfaces for communicating with Canonical Stores, such as Charmhub and the Snap Store.";
     homepage = "https://github.com/canonical/craft-store";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

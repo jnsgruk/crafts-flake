@@ -63,10 +63,10 @@ pkgs.python3Packages.buildPythonApplication {
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Package, distribute, and update any app for Linux and IoT.";
     homepage = "https://github.com/snapcore/snapcraft";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

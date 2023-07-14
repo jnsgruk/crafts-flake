@@ -50,10 +50,10 @@ pkgs.python3Packages.buildPythonApplication {
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Build and publish Charmed Operators";
     homepage = "https://github.com/canonical/charmcraft";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

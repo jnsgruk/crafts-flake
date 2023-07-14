@@ -20,10 +20,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "A small helper library that adds some YAML capabilities to pydantic.";
     homepage = "https://github.com/NowanIlfideme/pydantic-yaml";
-    license = licenses.mit;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

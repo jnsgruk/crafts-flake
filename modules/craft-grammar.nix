@@ -18,10 +18,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Advanced grammar for parts.";
     homepage = "https://github.com/canonical/craft-grammar";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

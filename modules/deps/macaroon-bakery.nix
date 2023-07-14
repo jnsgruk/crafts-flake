@@ -20,10 +20,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "A Python library for working with macaroons.";
     homepage = "https://github.com/go-macaroon-bakery/py-macaroon-bakery";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

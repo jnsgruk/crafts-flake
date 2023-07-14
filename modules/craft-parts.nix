@@ -25,10 +25,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Software artifact parts builder from Canonical.";
     homepage = "https://github.com/canonical/craft-parts";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

@@ -16,10 +16,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "SPDX license list query tool";
     homepage = "https://pypi.python.org/pypi/spdx-lookup";
-    license = licenses.bsd2;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.bsd2;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

@@ -20,10 +20,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "A Command Line Client builder that follows the Canonical's Guidelines for a Command Line Interface.";
     homepage = "https://github.com/canonical/craft-cli";
-    license = licenses.lgpl3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.lgpl3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }

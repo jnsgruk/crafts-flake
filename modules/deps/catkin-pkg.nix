@@ -20,10 +20,10 @@
 
   doCheck = false;
 
-  meta = with lib; {
+  meta = {
     description = "Library for retrieving information about catkin packages.";
     homepage = "http://wiki.ros.org/catkin_pkg";
-    license = licenses.bsd3;
-    maintainers = with maintainers; [ jnsgruk ];
+    license = lib.licenses.bsd3;
+    maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }
