@@ -39,7 +39,7 @@
             craft-grammar = final.callPackage ./deps/craft-grammar.nix { };
             craft-parts = final.callPackage ./deps/craft-parts.nix { };
             craft-providers = final.callPackage ./deps/craft-providers { };
-            craft-store = final.callPackage ./deps/craft-store { };
+            craft-store = final.callPackage ./deps/craft-store.nix { };
             gnupg = python-final.callPackage ./deps/gnupg.nix { };
             macaroon-bakery = python-final.callPackage ./deps/macaroon-bakery.nix { };
             pydantic-yaml = python-final.callPackage ./deps/pydantic-yaml.nix { };

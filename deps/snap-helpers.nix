@@ -1,9 +1,13 @@
 { pkgs
 , lib
 , ...
-}: pkgs.python3Packages.buildPythonPackage rec {
+}:
+let
   pname = "snap-helpers";
   version = "0.3.2";
+in
+pkgs.python3Packages.buildPythonPackage rec {
+  inherit pname version;
 
   src = pkgs.python3Packages.fetchPypi {
     inherit pname version;

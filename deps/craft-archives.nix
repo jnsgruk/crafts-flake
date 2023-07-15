@@ -1,14 +1,18 @@
 { pkgs
 , lib
 , ...
-}: pkgs.python3Packages.buildPythonPackage rec {
+}:
+let
   pname = "craft-archives";
   version = "1.1.0";
+in
+pkgs.python3Packages.buildPythonPackage rec {
+  inherit pname version;
   format = "pyproject";
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
-    repo = "craft-archives";
+    repo = pname;
     rev = "v${version}";
     sha256 = "sha256-jyCTHuPS8qvPWMtvcY/GQK0NXlTObnyKHQzN2R1VikI=";
   };

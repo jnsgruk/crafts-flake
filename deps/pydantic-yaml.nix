@@ -1,9 +1,13 @@
 { pkgs
 , lib
 , ...
-}: pkgs.python3Packages.buildPythonPackage rec {
+}:
+let
   pname = "pydantic_yaml";
   version = "0.11.2";
+in
+pkgs.python3Packages.buildPythonPackage rec {
+  inherit pname version;
 
   src = pkgs.python3Packages.fetchPypi {
     inherit pname version;

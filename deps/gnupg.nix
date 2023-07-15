@@ -1,9 +1,13 @@
 { pkgs
 , lib
 , ...
-}: pkgs.python3Packages.buildPythonPackage rec {
+}:
+let
   pname = "gnupg";
   version = "2.3.1";
+in
+pkgs.python3Packages.buildPythonPackage rec {
+  inherit pname version;
 
   src = pkgs.fetchFromGitHub {
     owner = "isislovecruft";
