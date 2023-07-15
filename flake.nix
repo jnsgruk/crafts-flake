@@ -33,20 +33,20 @@
       overlay = final: prev: rec {
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
           (python-final: _python-prev: {
-            catkin-pkg = python-final.callPackage ./modules/deps/catkin-pkg.nix { };
-            craft-archives = final.callPackage ./modules/craft-archives.nix { };
-            craft-cli = final.callPackage ./modules/craft-cli.nix { };
-            craft-grammar = final.callPackage ./modules/craft-grammar.nix { };
-            craft-parts = final.callPackage ./modules/craft-parts.nix { };
-            craft-providers = final.callPackage ./modules/craft-providers { };
-            craft-store = final.callPackage ./modules/craft-store { };
-            gnupg = python-final.callPackage ./modules/deps/gnupg.nix { };
-            macaroon-bakery = python-final.callPackage ./modules/deps/macaroon-bakery.nix { };
-            pydantic-yaml = python-final.callPackage ./modules/deps/pydantic-yaml.nix { };
-            snap-helpers = python-final.callPackage ./modules/deps/snap-helpers.nix { };
-            spdx = python-final.callPackage ./modules/deps/spdx.nix { };
-            spdx-lookup = python-final.callPackage ./modules/deps/spdx-lookup.nix { };
-            types-deprecated = python-final.callPackage ./modules/deps/types-deprecated.nix { };
+            catkin-pkg = python-final.callPackage ./deps/catkin-pkg.nix { };
+            craft-archives = final.callPackage ./deps/craft-archives.nix { };
+            craft-cli = final.callPackage ./deps/craft-cli.nix { };
+            craft-grammar = final.callPackage ./deps/craft-grammar.nix { };
+            craft-parts = final.callPackage ./deps/craft-parts.nix { };
+            craft-providers = final.callPackage ./deps/craft-providers { };
+            craft-store = final.callPackage ./deps/craft-store { };
+            gnupg = python-final.callPackage ./deps/gnupg.nix { };
+            macaroon-bakery = python-final.callPackage ./deps/macaroon-bakery.nix { };
+            pydantic-yaml = python-final.callPackage ./deps/pydantic-yaml.nix { };
+            snap-helpers = python-final.callPackage ./deps/snap-helpers.nix { };
+            spdx = python-final.callPackage ./deps/spdx.nix { };
+            spdx-lookup = python-final.callPackage ./deps/spdx-lookup.nix { };
+            types-deprecated = python-final.callPackage ./deps/types-deprecated.nix { };
           })
         ];
 
@@ -62,9 +62,9 @@
         python3Packages = final.python3.pkgs;
 
 
-        charmcraft = final.callPackage ./modules/charmcraft { };
-        rockcraft = final.callPackage ./modules/rockcraft { };
-        snapcraft = final.callPackage ./modules/snapcraft { };
+        charmcraft = final.callPackage ./apps/charmcraft { };
+        rockcraft = final.callPackage ./apps/rockcraft { };
+        snapcraft = final.callPackage ./apps/snapcraft { };
       };
 
       packages = forAllSystems (system: {
