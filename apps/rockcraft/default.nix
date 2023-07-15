@@ -13,7 +13,7 @@ pkgs.python3Packages.buildPythonApplication {
   src = pkgs.fetchFromGitHub {
     inherit rev;
     owner = "canonical";
-    repo = "rockcraft";
+    repo = pname;
     sha256 = "sha256-6lbSx5SY0cPMMTyVQLOOS5Og8HTUESq9qFUVZ7GjZ6Y=";
   };
 

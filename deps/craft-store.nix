@@ -1,14 +1,18 @@
 { pkgs
 , lib
 , ...
-}: pkgs.python3Packages.buildPythonPackage rec {
+}:
+let
   pname = "craft-store";
   # Version 2.4.0 - no tag was created for this release
   version = "d16851676d6ff632d063ed5e6199dc0d8aca93c7";
+in
+pkgs.python3Packages.buildPythonPackage rec {
+  inherit pname version;
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
-    repo = "craft-store";
+    repo = pname;
     rev = version;
     sha256 = "sha256-i/d4EzrpFbv51z+qkCse7te0fIlotdBbGIjFsQwmzcw=";
   };

@@ -11,7 +11,7 @@ pkgs.python3Packages.buildPythonApplication {
 
   src = pkgs.fetchFromGitHub {
     owner = "snapcore";
-    repo = "snapcraft";
+    repo = pname;
     rev = version;
     sha256 = "sha256-U68NHjsdZExs+bJ0ejqIs+Il7Sq5iIPQ8ESy7xxoNuw=";
   };

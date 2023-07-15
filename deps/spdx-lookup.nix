@@ -1,9 +1,13 @@
 { pkgs
 , lib
 , ...
-}: pkgs.python3Packages.buildPythonPackage rec {
+}:
+let
   pname = "spdx-lookup";
   version = "0.3.3";
+in
+pkgs.python3Packages.buildPythonPackage rec {
+  inherit pname version;
 
   src = pkgs.python3Packages.fetchPypi {
     inherit pname version;

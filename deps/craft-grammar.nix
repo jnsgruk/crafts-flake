@@ -1,13 +1,17 @@
 { pkgs
 , lib
 , ...
-}: pkgs.python3Packages.buildPythonPackage rec {
+}:
+let
   pname = "craft-grammar";
   version = "697e4ddc1f51de0ca02b349977439e37cff5bdfb";
+in
+pkgs.python3Packages.buildPythonPackage rec {
+  inherit pname version;
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
-    repo = "craft-grammar";
+    repo = pname;
     rev = version;
     sha256 = "sha256-rfsrbcCABuEVqG24GK4bzZBAm2u2obTbLjZpEB8Xnhc=";
   };
