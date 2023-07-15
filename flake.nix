@@ -18,8 +18,6 @@
       supportedSystems = [
         "x86_64-linux"
         # "aarch64-linux"
-        # "x86_64-darwin"
-        # "aarch64-darwin"
       ];
 
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -29,24 +27,24 @@
         overlays = [ self.overlay ];
       });
     in
-    rec {
-      overlay = final: prev: rec {
+    {
+      overlay = final: prev: {
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
-          (python-final: _python-prev: {
-            catkin-pkg = python-final.callPackage ./deps/catkin-pkg.nix { };
+          (_python-final: _python_prev: {
+            catkin-pkg = final.callPackage ./deps/catkin-pkg.nix { };
             craft-archives = final.callPackage ./deps/craft-archives.nix { };
             craft-cli = final.callPackage ./deps/craft-cli.nix { };
             craft-grammar = final.callPackage ./deps/craft-grammar.nix { };
             craft-parts = final.callPackage ./deps/craft-parts.nix { };
             craft-providers = final.callPackage ./deps/craft-providers { };
             craft-store = final.callPackage ./deps/craft-store.nix { };
-            gnupg = python-final.callPackage ./deps/gnupg.nix { };
-            macaroon-bakery = python-final.callPackage ./deps/macaroon-bakery.nix { };
-            pydantic-yaml = python-final.callPackage ./deps/pydantic-yaml.nix { };
-            snap-helpers = python-final.callPackage ./deps/snap-helpers.nix { };
-            spdx = python-final.callPackage ./deps/spdx.nix { };
-            spdx-lookup = python-final.callPackage ./deps/spdx-lookup.nix { };
-            types-deprecated = python-final.callPackage ./deps/types-deprecated.nix { };
+            gnupg = final.callPackage ./deps/gnupg.nix { };
+            macaroon-bakery = final.callPackage ./deps/macaroon-bakery.nix { };
+            pydantic-yaml = final.callPackage ./deps/pydantic-yaml.nix { };
+            snap-helpers = final.callPackage ./deps/snap-helpers.nix { };
+            spdx = final.callPackage ./deps/spdx.nix { };
+            spdx-lookup = final.callPackage ./deps/spdx-lookup.nix { };
+            types-deprecated = final.callPackage ./deps/types-deprecated.nix { };
           })
         ];
 
@@ -60,7 +58,6 @@
           self;
 
         python3Packages = final.python3.pkgs;
-
 
         charmcraft = final.callPackage ./apps/charmcraft { };
         rockcraft = final.callPackage ./apps/rockcraft { };
