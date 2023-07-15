@@ -4,16 +4,16 @@
 }:
 let
   pname = "charmcraft";
-  version = "2.3.0";
+  version = "2.3.1";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit pname version;
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
-    repo = "charmcraft";
+    repo = pname;
     rev = version;
-    sha256 = "sha256-kkA7+5+SgsaKADw5F2X3HyPpIsp+aYFhG6S5drjOF9M=";
+    hash = "sha256-9+ratuhP3t+mFcJt28tMPXdaDyc5P/jtoiyh+A8NqRY=";
   };
 
   patches = [
