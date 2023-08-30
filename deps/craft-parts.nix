@@ -4,7 +4,7 @@
 }:
 let
   pname = "craft-parts";
-  version = "1.23.0";
+  version = "1.24.0";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
@@ -13,7 +13,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     owner = "canonical";
     repo = pname;
     rev = "${version}";
-    sha256 = "sha256-Jg3o8sQz6oVW0ZUvIcGY/ikaQjj+EigEmeRxc6E7uus=";
+    sha256 = "sha256-95ovJb7PTM6BYONELTOQWkGq+WpIrAKhQ/ZQXb2t3x4=";
   };
 
   propagatedBuildInputs = with pkgs.python3Packages;[
