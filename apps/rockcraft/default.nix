@@ -4,8 +4,8 @@
 }:
 let
   pname = "rockcraft";
-  version = "unstable-2023-07-26";
-  rev = "d81be44494fea5fd16f4d4baf2a6cafa66bfb083";
+  version = "unstable-2023-08-25";
+  rev = "316e7bcf666fe44abf0c30a9e7ea4af7fedc7994";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit pname version rev;
@@ -14,7 +14,7 @@ pkgs.python3Packages.buildPythonApplication {
     inherit rev;
     owner = "canonical";
     repo = pname;
-    sha256 = "sha256-Eo6blR9vDvdC37zIedyf9IPPh09XWBU9ECwPO6Ti4WQ=";
+    sha256 = "sha256-jDEa0o1ck6fhYIJfUgPsRJHJoUim6Ken+4m4HqBlUO8=";
   };
 
   patches = [
