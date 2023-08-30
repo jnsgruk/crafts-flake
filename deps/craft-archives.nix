@@ -4,7 +4,7 @@
 }:
 let
   pname = "craft-archives";
-  version = "1.1.0";
+  version = "1.1.3";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
@@ -14,15 +14,15 @@ pkgs.python3Packages.buildPythonPackage rec {
     owner = "canonical";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-jyCTHuPS8qvPWMtvcY/GQK0NXlTObnyKHQzN2R1VikI=";
+    sha256 = "sha256-ZUqMjbOsHwzZyn0NsSTlZTljzagYEirWKEGatXVL43g=";
   };
 
   postPatch = ''
-    substituteInPlace \
-      craft_archives/__init__.py \
-      --replace \
-      'dev' \
-      '${version}'
+    substituteInPlace craft_archives/__init__.py \
+      --replace "dev" "${version}"
+    
+    substituteInPlace pyproject.toml \
+      --replace "setuptools==67.7.2" "setuptools"
   '';
 
   propagatedBuildInputs = with pkgs.python3Packages;[
