@@ -1,0 +1,18 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 58bfed0..5fa313b 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -97,7 +97,12 @@ git_describe_command = "git describe --dirty --long --match '[0-9]*.[0-9]*.[0-9]
+ [tool.setuptools]
+ packages = [
+     "craft_providers",
+-    "craft_providers_docs"
++    "craft_providers.actions",
++    "craft_providers.bases",
++    "craft_providers.lxd",
++    "craft_providers.multipass",
++    "craft_providers.util",
++    "craft_providers_docs",
+ ]
+ 
+ [tool.setuptools.package-dir]
