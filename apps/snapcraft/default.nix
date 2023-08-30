@@ -4,7 +4,7 @@
 }:
 let
   pname = "snapcraft";
-  version = "7.5.0";
+  version = "7.5.0+9ad7a93";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit pname version;
@@ -12,8 +12,8 @@ pkgs.python3Packages.buildPythonApplication {
   src = pkgs.fetchFromGitHub {
     owner = "snapcore";
     repo = pname;
-    rev = version;
-    sha256 = "sha256-Wxjsw4j+fGY4nC2Of5Y5zjwOTRg7Jky9KGXUDyZwrvc=";
+    rev = "9ad7a93ea880b560d3c8a364617c67a3b0b6d157";
+    sha256 = "sha256-P665jh3I+C+w/elTJnx3tPROJXzeLgVXAnW1WfdQ9jw=";
   };
 
   patches = [
