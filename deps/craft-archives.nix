@@ -13,7 +13,7 @@ pkgs.python3Packages.buildPythonPackage rec {
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
     repo = pname;
-    rev = "v${version}";
+    rev = version;
     sha256 = "sha256-ZUqMjbOsHwzZyn0NsSTlZTljzagYEirWKEGatXVL43g=";
   };
 
