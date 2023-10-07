@@ -12,12 +12,14 @@ jobs:
     steps:
       - name: Checkout flake
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@v4
 
       - name: Setup magic-nix-cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
+        uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - name: Update flake lock file
         uses: DeterminateSystems/update-flake-lock@v20
