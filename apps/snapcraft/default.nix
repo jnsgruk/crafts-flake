@@ -4,7 +4,7 @@
 }:
 let
   pname = "snapcraft";
-  version = "7.5.0+9ad7a93";
+  version = "7.5.3";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit pname version;
