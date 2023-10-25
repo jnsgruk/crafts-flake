@@ -4,7 +4,7 @@
 }:
 let
   pname = "charmcraft";
-  version = "2.4.1";
+  version = "2.5.0";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit pname version;
@@ -13,7 +13,7 @@ pkgs.python3Packages.buildPythonApplication {
     owner = "canonical";
     repo = pname;
     rev = version;
-    hash = "sha256-Ba8wTlWVVuP99z9LmoDp2Hb0fg3i2924TLRT6b6WDPw=";
+    hash = "sha256-G6ZHGiqtg+5U40mcwS46izwrRRA2cKaVeARMDDdk9uk=";
   };
 
   patches = [
@@ -33,6 +33,7 @@ pkgs.python3Packages.buildPythonApplication {
     craft-parts
     craft-providers
     craft-store
+    distro
     humanize
     jinja2
     jsonschema
