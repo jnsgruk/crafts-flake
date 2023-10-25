@@ -4,14 +4,14 @@
 }:
 let
   pname = "types-Deprecated";
-  version = "1.2.9";
+  version = "1.2.9.3";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
 
   src = pkgs.python3Packages.fetchPypi {
     inherit version pname;
-    sha256 = "sha256-4EzliSlQmGU1npHcw4cgEjJitM1o+iqKkDEtUDkLtvo=";
+    sha256 = "sha256-74cyet8+PEpMfY4G5Y9kdnENNGbs+1PEnvsICASnDvM=";
   };
 
   meta = {
