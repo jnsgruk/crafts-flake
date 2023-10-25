@@ -1,0 +1,104 @@
+name: Tests
+
+on:
+  workflow_call:
+    secrets:
+      CACHIX_AUTH_TOKEN:
+        required: true
+
+jobs:
+  test-snapcraft:
+    name: Snapcraft
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout flake
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v6
+
+      - name: Setup magic-nix-cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Setup cachix
+        uses: cachix/cachix-action@v12
+        with:
+          name: jnsgruk
+          # If you chose API tokens for write access OR if you have a private cache
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+    
+      - name: Build Snapcraft
+        run: nix build .#snapcraft
+      
+      - name: Setup LXD
+        uses: canonical/setup-lxd@v0.1.1
+
+      - name: Test Snapcraft
+        run: |
+          git clone https://github.com/jnsgruk/terraform-snap test
+          cd test
+          ../result/bin/snapcraft --use-lxd --verbose
+
+  test-charmcraft:
+    name: Charmcraft
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout flake
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v6
+
+      - name: Setup magic-nix-cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Setup cachix
+        uses: cachix/cachix-action@v12
+        with:
+          name: jnsgruk
+          # If you chose API tokens for write access OR if you have a private cache
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+    
+      - name: Build Charmcraft
+        run: nix build .#charmcraft
+      
+      - name: Setup LXD
+        uses: canonical/setup-lxd@v0.1.1
+
+      - name: Test Charmcraft
+        run: |
+          git clone https://github.com/jnsgruk/parca-agent-operator test
+          cd test
+          ../result/bin/charmcraft pack --verbose
+
+  test-rockcraft:
+    name: Rockcraft
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout flake
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v6
+
+      - name: Setup magic-nix-cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Setup cachix
+        uses: cachix/cachix-action@v12
+        with:
+          name: jnsgruk
+          # If you chose API tokens for write access OR if you have a private cache
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+    
+      - name: Build Rockcraft
+        run: nix build .#rockcraft
+      
+      - name: Setup LXD
+        uses: canonical/setup-lxd@v0.1.1
+
+      - name: Test Rockcraft
+        run: |
+          git clone https://github.com/jnsgruk/zinc-k8s-operator test
+          cd test
+          ../result/bin/rockcraft --verbose
