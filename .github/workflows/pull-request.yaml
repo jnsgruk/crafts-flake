@@ -11,6 +11,7 @@ concurrency:
 
 jobs:
   test:
+    name: Tests
     uses: ./.github/workflows/test.yaml
     secrets:
       CACHIX_AUTH_TOKEN: "${{ secrets.CACHIX_AUTH_TOKEN }}"
