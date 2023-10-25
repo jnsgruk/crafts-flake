@@ -12,7 +12,7 @@ popd
 TEST_DIR="${ROOT_DIR}/.test/charmcraft"
 rm -rf "$TEST_DIR"
 mkdir -p "$TEST_DIR"
-git clone https://github.com/jnsgruk/parca-agent-operator "$TEST_DIR"
+git clone https://github.com/jnsgruk/parca-k8s-operator "$TEST_DIR"
 pushd "$TEST_DIR"
 
 "$CHARMCRAFT" pack --verbose
