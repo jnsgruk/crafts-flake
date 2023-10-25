@@ -4,7 +4,7 @@
 }:
 let
   pname = "craft-providers";
-  version = "1.15.0";
+  version = "1.19.0";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
@@ -14,7 +14,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     owner = "canonical";
     repo = pname;
     rev = version;
-    sha256 = "sha256-Yy3ZINItHi+/xqot8BesaGEkqFPKgTiK3vf8gKN2McA=";
+    sha256 = "sha256-wv4qQWzdbKrA3NvGbg+L7uo4poa+auaf9PTZ6SsPHMY=";
   };
 
   patches = [
