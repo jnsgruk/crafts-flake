@@ -26,7 +26,15 @@ pkgs.python3Packages.buildPythonApplication {
       setup.py \
       --replace 'version=determine_version()' 'version="${version}"' \
       --replace 'setuptools<66' 'setuptools' \
-      --replace 'jsonschema==2.5.1' 'jsonschema' \
+      --replace 'jsonschema==2.5.1' 'jsonschema'
+
+    substituteInPlace \
+      snapcraft/__init__.py \
+      --replace '__version__ = _get_version()' '__version__ = "${version}"'
+
+    substituteInPlace \
+      snapcraft_legacy/__init__.py \
+      --replace '__version__ = _get_version()' '__version__ = "${version}"'
   '';
 
   propagatedBuildInputs = with pkgs.python3Packages; [
