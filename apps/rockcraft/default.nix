@@ -4,30 +4,20 @@
 }:
 let
   pname = "rockcraft";
-  version = "unstable-2023-10-24";
-  rev = "1a8bbf6bd328c97ee47e6189011d269ee3617ce7";
+  version = "1.0.1";
 in
 pkgs.python3Packages.buildPythonApplication {
-  inherit pname version rev;
+  inherit pname version;
 
   src = pkgs.fetchFromGitHub {
-    inherit rev;
     owner = "canonical";
     repo = pname;
-    sha256 = "sha256-37e6WSmkynUIEOdQ07Eut+RpncWANYpRFJKXtjhgs84=";
+    rev = "refs/tags/${version}";
+    sha256 = "sha256-CMgpLXYiaBoD2aoZbajBIea5iAnrw4/zjKkeR4+WuCg=";
   };
 
-  patches = [
-    ./set-channel-for-nix.patch
-  ];
-
-  postPatch = ''
-    substituteInPlace \
-      rockcraft/__init__.py \
-      --replace '__version__ = "0.0.1.dev1"' '__version__ = "0.0.1+g${builtins.substring 0 7 rev}"'
-  '';
-
   propagatedBuildInputs = with pkgs.python3Packages; [
+    craft-application
     craft-archives
     craft-cli
     craft-parts
@@ -35,6 +25,8 @@ pkgs.python3Packages.buildPythonApplication {
     gnupg
     spdx-lookup
   ];
+
+  env.SETUPTOOLS_SCM_PRETEND_VERSION = version;
 
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;
