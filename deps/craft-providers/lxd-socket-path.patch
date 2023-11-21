@@ -1,8 +1,8 @@
 diff --git a/craft_providers/lxd/installer.py b/craft_providers/lxd/installer.py
-index 53750ae..a391741 100644
+index 887cc59..c8313f9 100644
 --- a/craft_providers/lxd/installer.py
 +++ b/craft_providers/lxd/installer.py
-@@ -101,7 +101,7 @@ def is_user_permitted() -> bool:
+@@ -108,7 +108,7 @@ def is_user_permitted() -> bool:
  
      :returns: True if user has correct permissions.
      """
