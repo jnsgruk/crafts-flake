@@ -32,6 +32,7 @@
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
           (_python-final: _python_prev: {
             catkin-pkg = final.callPackage ./deps/catkin-pkg.nix { };
+            craft-application = final.callPackage ./deps/craft-application.nix { };
             craft-archives = final.callPackage ./deps/craft-archives.nix { };
             craft-cli = final.callPackage ./deps/craft-cli.nix { };
             craft-grammar = final.callPackage ./deps/craft-grammar.nix { };
