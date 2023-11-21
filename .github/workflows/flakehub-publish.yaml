@@ -9,6 +9,7 @@ on:
         description: "The existing tag to publish to FlakeHub"
         type: "string"
         required: true
+
 jobs:
   flakehub-publish:
     runs-on: "ubuntu-latest"
@@ -16,11 +17,16 @@ jobs:
       id-token: "write"
       contents: "read"
     steps:
-      - uses: "actions/checkout@v4"
+      - name: Checkout flake
+        uses: actions/checkout@v4
         with:
           ref: "${{ (inputs.tag != null) && format('refs/tags/{0}', inputs.tag) || '' }}"
-      - uses: "DeterminateSystems/nix-installer-action@main"
-      - uses: "DeterminateSystems/flakehub-push@main"
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v7
+
+      - name: Publish to Flakehub
+        uses: "DeterminateSystems/flakehub-push@main"
         with:
           visibility: "public"
           name: "jnsgruk/crafts-flake"
