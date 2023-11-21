@@ -15,9 +15,7 @@ mkdir -p "$TEST_DIR"
 git clone https://github.com/jnsgruk/zinc-k8s-operator "$TEST_DIR"
 pushd "$TEST_DIR"
 
-"$ROCKCRAFT" --verbose
+"$ROCKCRAFT" pack --verbose
 popd
 
 rm -rf "$TEST_DIR"
-
-

@@ -19,4 +19,3 @@ pushd "$TEST_DIR"
 popd
 
 rm -rf "$TEST_DIR"
-
