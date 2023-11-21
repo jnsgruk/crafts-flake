@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Set some SSH options to ignore host key errors and make logging quieter.
+# This is a bad idea in general, but here is used to faciliate comms with
+# a brand new VM each time.
+SSH_OPTS=(
+    -o "UserKnownHostsFile=/dev/null"
+    -o "StrictHostKeyChecking=no"
+    -o "LogLevel=ERROR"
+)
+
+# Function to help run arbitrary commands in the test VM over SSH.
+run_cmd() {
+    sshpass -ppassword ssh root@localhost -p 2222 "${SSH_OPTS[@]}" -- "$@"
+}
+
+# Simple connection test / waiter to ensure SSH is available before running
+# the command we actually care about.
+while ! run_cmd cat /etc/hostname >/dev/null; do
+    echo "Waiting for SSH server to be available..."
+    sleep 1;
+done
+
+run_cmd "$@"

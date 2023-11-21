@@ -63,11 +63,28 @@
         charmcraft = final.callPackage ./apps/charmcraft { };
         rockcraft = final.callPackage ./apps/rockcraft { };
         snapcraft = final.callPackage ./apps/snapcraft { };
+
+        # A virtual machine for integration testing the crafts
+        testVm = self.nixosConfigurations.testvm.config.system.build.vm;
+        # Helper script for running commands inside the test VM when it's running on a host.
+        testVmExec = final.writeShellApplication {
+          name = "vmExec";
+          runtimeInputs = with final.pkgs; [ sshpass ];
+          text = builtins.readFile ./test/vm-exec;
+        };
       };
 
       packages = forAllSystems (system: {
-        inherit (pkgsForSystem system) charmcraft rockcraft snapcraft;
+        inherit (pkgsForSystem system) charmcraft rockcraft snapcraft testVm testVmExec;
       });
+
+      # A minimal NixOS virtual machine which used for testing craft applications.
+      nixosConfigurations = {
+        testvm = nixpkgs.lib.nixosSystem {
+          specialArgs = { flake = self; };
+          modules = [ ./test/vm.nix ];
+        };
+      };
 
       formatter = forAllSystems (system:
         nix-formatter-pack.lib.mkFormatter {

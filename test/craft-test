@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+craft="$1"
+
+# Initialise LXD if required, no-op if already complete
+lxd init --auto
+
+# Create a directory to clone the test code into
+test_dir="${HOME}/.cache/craft-test-$(head -c2 </dev/urandom | xxd -p -u)"
+mkdir -p "$test_dir"
+
+if [[ "$craft" == "charmcraft" ]]; then
+    git clone https://github.com/jnsgruk/parca-k8s-operator "$test_dir"
+    pushd "$test_dir"
+    charmcraft pack --verbose
+elif [[ "$craft" == "snapcraft" ]]; then
+    git clone https://github.com/jnsgruk/terraform-snap "$test_dir"
+    pushd "$test_dir"
+    snapcraft pack --verbose
+elif [[ "$craft" == "rockcraft" ]]; then
+    git clone https://github.com/jnsgruk/zinc-k8s-operator "$test_dir"
+    pushd "$test_dir"
+    rockcraft pack --verbose
+fi
+
+# Clean up the test directory
+popd
+rm -rf "$test_dir"
