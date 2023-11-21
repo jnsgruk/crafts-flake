@@ -1,4 +1,4 @@
-name: Build packages
+name: PR
 on:
   pull_request:
     branches:
@@ -9,6 +9,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint:
+    uses: ./.github/workflows/lint.yaml
   build:
     uses: ./.github/workflows/build.yaml
     secrets:
