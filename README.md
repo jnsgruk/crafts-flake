@@ -1,5 +1,8 @@
 # crafts-flake
 
+[![FlakeHub](https://img.shields.io/endpoint?url=https://flakehub.com/f/jnsgruk/crafts-flake/badge)](https://flakehub.com/flake/jnsgruk/crafts-flake)
+[![tests](https://github.com/jnsgruk/crafts-flake/actions/workflows/ci.yaml/badge.svg)](https://github.com/jnsgruk/crafts-flake/actions/workflows/ci.yaml)
+
 An experimental nix flake for the Canonical ⭐craft suite of tools.
 
 ## Quick start
