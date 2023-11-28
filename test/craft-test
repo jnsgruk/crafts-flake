@@ -1,28 +1,45 @@
 #!/usr/bin/env bash
 set -euo pipefail
-craft="$1"
+
+run_test() {
+    local repo="$1"
+    mkdir -p "$test_dir"
+    git clone "$repo" "$test_dir"
+
+    pushd "$test_dir"
+    "$craft" pack --verbose
+    popd
+
+    rm -rf "$test_dir"
+}
+
+usage() {
+    echo "Usage: craft-test charmcraft|snapcraft|rockcraft"
+    exit 1
+}
+
+craft="${1:-}"
+if [[ -z "$craft" ]]; then
+  usage
+fi
+
+test_dir="${HOME}/.cache/craft-test-$craft-$(head -c2 </dev/urandom | xxd -p -u)"
 
 # Initialise LXD if required, no-op if already complete
 lxd init --auto
 
-# Create a directory to clone the test code into
-test_dir="${HOME}/.cache/craft-test-$(head -c2 </dev/urandom | xxd -p -u)"
-mkdir -p "$test_dir"
-
-if [[ "$craft" == "charmcraft" ]]; then
-    git clone https://github.com/jnsgruk/parca-k8s-operator "$test_dir"
-    pushd "$test_dir"
-    charmcraft pack --verbose
-elif [[ "$craft" == "snapcraft" ]]; then
-    git clone https://github.com/jnsgruk/terraform-snap "$test_dir"
-    pushd "$test_dir"
-    snapcraft pack --verbose
-elif [[ "$craft" == "rockcraft" ]]; then
-    git clone https://github.com/jnsgruk/zinc-k8s-operator "$test_dir"
-    pushd "$test_dir"
-    rockcraft pack --verbose
-fi
-
-# Clean up the test directory
-popd
-rm -rf "$test_dir"
+case "$craft" in
+  "charmcraft")
+    run_test https://github.com/jnsgruk/parca-k8s-operator
+    ;;
+  "snapcraft")
+    run_test https://github.com/jnsgruk/terraform-snap
+    ;;
+  "rockcraft")
+    run_test https://github.com/jnsgruk/zinc-k8s-operator
+    ;;
+  *)
+    echo "Usage: craft-test charmcraft|snapcraft|rockcraft"
+    exit 1
+    ;;
+esac
