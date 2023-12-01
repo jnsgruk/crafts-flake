@@ -37,6 +37,8 @@ pkgs.python3Packages.buildPythonApplication {
       --replace '__version__ = _get_version()' '__version__ = "${version}"'
   '';
 
+  buildInputs = with pkgs; [ makeWrapper ];
+
   propagatedBuildInputs = with pkgs.python3Packages; [
     attrs
     catkin-pkg
@@ -66,6 +68,10 @@ pkgs.python3Packages.buildPythonApplication {
     tabulate
     tinydb
   ];
+
+  postInstall = ''
+    wrapProgram $out/bin/snapcraft --prefix PATH : ${pkgs.squashfsTools}/bin
+  '';
 
   # TODO: Try to make the tests pass and remove this.
   doCheck = false;
