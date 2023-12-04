@@ -23,7 +23,7 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Setup cachix
-        uses: cachix/cachix-action@v12
+        uses: cachix/cachix-action@v13
         with:
           name: jnsgruk
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
