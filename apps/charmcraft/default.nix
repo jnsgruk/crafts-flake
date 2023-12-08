@@ -4,7 +4,7 @@
 }:
 let
   pname = "charmcraft";
-  version = "2.5.1";
+  version = "2.5.3";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit pname version;
@@ -13,7 +13,7 @@ pkgs.python3Packages.buildPythonApplication {
     owner = "canonical";
     repo = pname;
     rev = version;
-    hash = "sha256-TQuXxsAj/MVGnDG865Ka/zkYaksbScpBzeO/lgjkry8=";
+    hash = "sha256-7k7d54jq3/X/ywaiiaLWrgXQlrnb8o19j6PRrsAn9b4=";
   };
 
   patches = [
