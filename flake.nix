@@ -47,7 +47,7 @@
             spdx-lookup = final.callPackage ./deps/spdx-lookup.nix { };
             types-deprecated = final.callPackage ./deps/types-deprecated.nix { };
 
-            pydantic = python_prev.pydantic.overrideAttrs (oldAttrs: rec {
+            pydantic = python_prev.pydantic.overrideAttrs (_oldAttrs: rec {
               version = "1.10.13";
               pyproject = false;
 
@@ -69,7 +69,7 @@
 
             # versioningit 2.2.1 migrated to pydantic 2, which is incompatible with the
             # craft applications and libraries.
-            versioningit = python_prev.versioningit.overrideAttrs (oldAttrs: rec {
+            versioningit = python_prev.versioningit.overrideAttrs (_oldAttrs: rec {
               version = "2.2.0";
               src = prev.fetchFromGitHub {
                 owner = "jwodder";
