@@ -1,8 +1,8 @@
 diff --git a/craft_providers/base.py b/craft_providers/base.py
-index c7b3abc..2c62d0c 100644
+index 3c914a2..d9c2cf9 100644
 --- a/craft_providers/base.py
 +++ b/craft_providers/base.py
-@@ -655,37 +655,21 @@ class Base(ABC):
+@@ -655,37 +655,22 @@ class Base(ABC):
                      ),
                  )
  
@@ -38,17 +38,18 @@ index c7b3abc..2c62d0c 100644
 -                        details=error.details,
 -                    ) from error
 +            try:
++                channel = "latest/edge" if snap.name == "rockcraft" else "latest/stable"
 +                snap_installer.install_from_store(
 +                    executor=executor,
 +                    snap_name=snap.name,
-+                    channel=snap.channel or "latest/stable",
++                    channel=channel,
 +                    classic=snap.classic,
 +                )
 +            except SnapInstallationError as error:
 +                raise BaseConfigurationError(
 +                    brief=(
 +                        f"failed to install snap {snap.name!r} from store"
-+                        f" channel {snap.channel!r} in target environment."
++                        f" channel {channel!r} in target environment."
 +                    ),
 +                    details=error.details,
 +                ) from error
