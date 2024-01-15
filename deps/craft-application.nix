@@ -4,7 +4,7 @@
 }:
 let
   pname = "craft-application";
-  version = "1.0.0";
+  version = "1.2.1";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
@@ -14,20 +14,15 @@ pkgs.python3Packages.buildPythonPackage rec {
     owner = "canonical";
     repo = pname;
     rev = version;
-    sha256 = "sha256-y6nvfSnUlxoy6Qjbxkub14cHCcp4iz6uJ489VQYVSxI=";
+    sha256 = "sha256-CXZEWVoE66dlQJp4G8tinufjyaDJaH1Muxz/qd/81oA=";
   };
-
-  patches = [
-    # ./pyproject_version.patch
-  ];
 
   postPatch = ''
     substituteInPlace craft_application/__init__.py \
       --replace "dev" "${version}"
     
     substituteInPlace pyproject.toml \
-      --replace "setuptools==67.7.2" "setuptools" \
-      # --replace "CRAFTS_FLAKE_VERSION" "${version}"
+      --replace "setuptools==67.7.2" "setuptools"
   '';
 
   propagatedBuildInputs = with pkgs.python3Packages; [
