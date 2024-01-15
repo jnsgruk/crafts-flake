@@ -16,6 +16,10 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-Q0GMiglo16mvJUBDhy4cnWjFiHCsW61QsZkhejCjvsE=";
   };
 
+  patches = [
+    ./bash-path.patch
+  ];
+
   propagatedBuildInputs = with pkgs.python3Packages;[
     overrides
     pydantic
