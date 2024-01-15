@@ -4,7 +4,7 @@
 }:
 let
   pname = "craft-providers";
-  version = "1.19.2";
+  version = "1.20.1";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
@@ -14,7 +14,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     owner = "canonical";
     repo = pname;
     rev = version;
-    sha256 = "sha256-TwB6oz6EsVzF8KuVSwjjmbAE0ptmaoWF/s7xNHlEx1Q=";
+    sha256 = "sha256-EHcsgh0EO6L+HAd1M66VOp5Ha72fVyGnVECkAHYLULw=";
   };
 
   patches = [
@@ -31,7 +31,6 @@ pkgs.python3Packages.buildPythonPackage rec {
     # This is already patched in nixpkgs.
     substituteInPlace pyproject.toml \
       --replace "setuptools==67.7.2" "setuptools" \
-      --replace "pydantic<2.0" "pydantic" \
       --replace "urllib3<2" "urllib3"
   '';
 
