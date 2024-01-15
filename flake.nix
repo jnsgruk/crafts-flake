@@ -66,6 +66,18 @@
               preCheck = false;
               disabledTestPaths = false;
             });
+
+            # versioningit 2.2.1 migrated to pydantic 2, which is incompatible with the
+            # craft applications and libraries.
+            versioningit = python_prev.versioningit.overrideAttrs (oldAttrs: rec {
+              version = "2.2.0";
+              src = prev.fetchFromGitHub {
+                owner = "jwodder";
+                repo = "versioningit";
+                rev = "refs/tags/v${version}";
+                hash = "sha256-sM5n02ewzysYNctXLamZHxJa+61D+xnYennprXjoiYc=";
+              };
+            });
           })
         ];
 
