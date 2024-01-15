@@ -4,7 +4,7 @@
 }:
 let
   pname = "rockcraft";
-  version = "1.0.1";
+  version = "1.1.1";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit pname version;
@@ -13,7 +13,7 @@ pkgs.python3Packages.buildPythonApplication {
     owner = "canonical";
     repo = pname;
     rev = "refs/tags/${version}";
-    sha256 = "sha256-CMgpLXYiaBoD2aoZbajBIea5iAnrw4/zjKkeR4+WuCg=";
+    sha256 = "sha256-mAPkFgaqDEo/Elt9tfY7f9zwkw580ZCrnCpV736zYo8=";
   };
 
   propagatedBuildInputs = with pkgs.python3Packages; [
