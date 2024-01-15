@@ -4,14 +4,14 @@
 }:
 let
   pname = "macaroonbakery";
-  version = "1.3.1";
+  version = "1.3.4";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
 
   src = pkgs.python3Packages.fetchPypi {
     inherit pname version;
-    sha256 = "sha256-I/OEFTQaHQShVbTaxnMNOtXzm4bOB7G7E0vdpStIsFM=";
+    sha256 = "sha256-QcqZOiPk+O8v53I7XNSjDHWXNfHVAh6ZB3DIoODzOXA=";
   };
 
   propagatedBuildInputs = with pkgs.python3Packages; [
