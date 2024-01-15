@@ -30,7 +30,7 @@
     {
       overlay = final: prev: {
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
-          (_python-final: _python_prev: {
+          (_python-final: python_prev: {
             catkin-pkg = final.callPackage ./deps/catkin-pkg.nix { };
             craft-application = final.callPackage ./deps/craft-application.nix { };
             craft-archives = final.callPackage ./deps/craft-archives.nix { };
@@ -46,6 +46,26 @@
             spdx = final.callPackage ./deps/spdx.nix { };
             spdx-lookup = final.callPackage ./deps/spdx-lookup.nix { };
             types-deprecated = final.callPackage ./deps/types-deprecated.nix { };
+
+            pydantic = python_prev.pydantic.overrideAttrs (oldAttrs: rec {
+              version = "1.10.13";
+              pyproject = false;
+
+              src = prev.fetchFromGitHub {
+                owner = "pydantic";
+                repo = "pydantic";
+                rev = "refs/tags/v${version}";
+                hash = "sha256-ruDVcCLPVuwIkHOjYVuKOoP3hHHr7ItIY55Y6hUgR74=";
+              };
+
+              propagatedBuildInputs = with python_prev; [
+                setuptools
+                typing-extensions
+              ];
+
+              preCheck = false;
+              disabledTestPaths = false;
+            });
           })
         ];
 
