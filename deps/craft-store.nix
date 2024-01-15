@@ -4,8 +4,7 @@
 }:
 let
   pname = "craft-store";
-  # Version 2.4.0 but version was not tagged
-  version = "2.4.0";
+  version = "2.6.0";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
@@ -14,8 +13,8 @@ pkgs.python3Packages.buildPythonPackage rec {
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
     repo = pname;
-    rev = "721955c98fc5d991ab1233826d67faeed6f8c65d";
-    sha256 = "sha256-wNI3BVfSGWKV1hrMZ7hGNGksdHjCfv+vMLuoDh2f7M0=";
+    rev = "refs/tags/${version}";
+    sha256 = "sha256-VtKOe3IrvGcNWfp1/tg1cO94xtfkP7AbIHh0WTdlfbQ=";
   };
 
   postPatch = ''
@@ -28,6 +27,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     macaroon-bakery
     overrides
     pydantic
+    pyxdg
     requests
     requests-toolbelt
     setuptools
