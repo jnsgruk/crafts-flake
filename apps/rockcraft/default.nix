@@ -28,8 +28,19 @@ pkgs.python3Packages.buildPythonApplication {
 
   env.SETUPTOOLS_SCM_PRETEND_VERSION = version;
 
-  # TODO: Try to make the tests pass and remove this.
-  doCheck = false;
+  preCheck = ''
+    mkdir -p check-phase
+    export HOME=$(pwd)/check-phase
+  '';
+
+  nativeCheckInputs = with pkgs.python3Packages; [
+    pytest-check
+    pytest-mock
+    pytest-subprocess
+    pytestCheckHook
+  ] ++ (with pkgs; [
+    dpkg
+  ]);
 
   meta = {
     description = "Tool to create OCI Images using the language from Snapcraft and Charmcraft.";
