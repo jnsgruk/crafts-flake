@@ -4,7 +4,7 @@
 }:
 let
   pname = "snapcraft";
-  version = "7.5.3";
+  version = "8.0.1";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit pname version;
@@ -12,8 +12,8 @@ pkgs.python3Packages.buildPythonApplication {
   src = pkgs.fetchFromGitHub {
     owner = "snapcore";
     repo = pname;
-    rev = "9ad7a93ea880b560d3c8a364617c67a3b0b6d157";
-    sha256 = "sha256-P665jh3I+C+w/elTJnx3tPROJXzeLgVXAnW1WfdQ9jw=";
+    rev = "refs/tags/${version}";
+    sha256 = "sha256-V7Wmp43M2/cmI8/60ydgX/wOFfZIksA0HAWwGLBVPFA=";
   };
 
   patches = [
@@ -59,6 +59,7 @@ pkgs.python3Packages.buildPythonApplication {
     mypy-extensions
     progressbar
     pyelftools
+    pygit2
     pylxd
     raven
     requests-toolbelt
