@@ -1,0 +1,30 @@
+diff --git a/craft_parts/executor/step_handler.py b/craft_parts/executor/step_handler.py
+index 404df69..60e5aba 100644
+--- a/craft_parts/executor/step_handler.py
++++ b/craft_parts/executor/step_handler.py
+@@ -394,7 +394,8 @@ def _create_and_run_script(
+ ) -> None:
+     """Create a script with step-specific commands and execute it."""
+     with script_path.open("w") as run_file:
+-        print("#!/bin/bash", file=run_file)
++        import shutil
++        print(f"#!{shutil.which('bash')}", file=run_file)
+         print("set -euo pipefail", file=run_file)
+ 
+         if build_environment_script_path:
+diff --git a/craft_parts/plugins/validator.py b/craft_parts/plugins/validator.py
+index b8d8f11..fce0e72 100644
+--- a/craft_parts/plugins/validator.py
++++ b/craft_parts/plugins/validator.py
+@@ -142,9 +142,9 @@ class PluginEnvironmentValidator:
+             print(self._env, file=env_file)
+             print(cmd, file=env_file)
+             env_file.flush()
+-
++            import shutil
+             proc = subprocess.run(
+-                ["/bin/bash", env_file.name],
++                [shutil.which("bash"), env_file.name],
+                 check=True,
+                 capture_output=True,
+                 text=True,

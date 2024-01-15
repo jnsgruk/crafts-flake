@@ -36,7 +36,7 @@
             craft-archives = final.callPackage ./deps/craft-archives.nix { };
             craft-cli = final.callPackage ./deps/craft-cli.nix { };
             craft-grammar = final.callPackage ./deps/craft-grammar.nix { };
-            craft-parts = final.callPackage ./deps/craft-parts.nix { };
+            craft-parts = final.callPackage ./deps/craft-parts { };
             craft-providers = final.callPackage ./deps/craft-providers { };
             craft-store = final.callPackage ./deps/craft-store.nix { };
             gnupg = final.callPackage ./deps/gnupg.nix { };
