@@ -27,8 +27,12 @@ pkgs.python3Packages.buildPythonPackage rec {
     substituteInPlace craft_providers/__init__.py \
       --replace "dev" "${version}"
     
+    # The urllib3 incompat: https://github.com/msabramo/requests-unixsocket/pull/69
+    # This is already patched in nixpkgs.
     substituteInPlace pyproject.toml \
-      --replace "setuptools==67.7.2" "setuptools"
+      --replace "setuptools==67.7.2" "setuptools" \
+      --replace "pydantic<2.0" "pydantic" \
+      --replace "urllib3<2" "urllib3"
   '';
 
   propagatedBuildInputs = with pkgs.python3Packages; [
