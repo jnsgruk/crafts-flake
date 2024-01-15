@@ -4,7 +4,7 @@
 }:
 let
   pname = "craft-grammar";
-  version = "697e4ddc1f51de0ca02b349977439e37cff5bdfb";
+  version = "1.1.2";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
@@ -13,7 +13,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     owner = "canonical";
     repo = pname;
     rev = version;
-    sha256 = "sha256-rfsrbcCABuEVqG24GK4bzZBAm2u2obTbLjZpEB8Xnhc=";
+    sha256 = "sha256-23KLIO2yHXGe/zb3B8LirJsh+LY9z0c5ZGtF392Kszo=";
   };
 
   propagatedBuildInputs = with pkgs.python3Packages; [
