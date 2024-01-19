@@ -17,6 +17,7 @@ pkgs.python3Packages.buildPythonApplication {
   };
 
   patches = [
+    ./lxd-socket-path.patch
     ./os-platform.patch
     ./set-channel-for-nix.patch
     ./snapcraft-data-dirs.patch
