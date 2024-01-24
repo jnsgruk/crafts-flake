@@ -18,6 +18,5 @@ jobs:
 
       - name: Run nix-formatters-pack
         run: |
-          nix fmt
+          nix run github:jnsgruk/nixos-config#nixfmt
           git diff --exit-code
-
