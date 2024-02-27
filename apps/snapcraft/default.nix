@@ -3,17 +3,17 @@
 , ...
 }:
 let
-  pname = "snapcraft";
-  version = "8.0.1";
+  version = "8.0.3";
 in
 pkgs.python3Packages.buildPythonApplication {
-  inherit pname version;
+  inherit version;
+  pname = "snapcraft";
 
   src = pkgs.fetchFromGitHub {
-    owner = "snapcore";
-    repo = pname;
+    owner = "canonical";
+    repo = "snapcraft";
     rev = "refs/tags/${version}";
-    sha256 = "sha256-V7Wmp43M2/cmI8/60ydgX/wOFfZIksA0HAWwGLBVPFA=";
+    sha256 = "sha256-d7zVKnYdundHGfBE9niE+7fSCqJZalpIZSzsqu45lCw=";
   };
 
   patches = [
