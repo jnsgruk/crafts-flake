@@ -3,17 +3,17 @@
 , ...
 }:
 let
-  pname = "rockcraft";
-  version = "1.1.1";
+  version = "1.2.1";
 in
 pkgs.python3Packages.buildPythonApplication {
-  inherit pname version;
+  inherit version;
+  pname = "rockcraft";
 
   src = pkgs.fetchFromGitHub {
     owner = "canonical";
-    repo = pname;
+    repo = "rockcraft";
     rev = "refs/tags/${version}";
-    sha256 = "sha256-mAPkFgaqDEo/Elt9tfY7f9zwkw580ZCrnCpV736zYo8=";
+    sha256 = "sha256-RpoyG44MKY5LqzjaTr1agDAHCO+KIzC1nN8pNWk8XEU=";
   };
 
   propagatedBuildInputs = with pkgs.python3Packages; [
