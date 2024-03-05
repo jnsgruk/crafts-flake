@@ -19,7 +19,7 @@ pkgs.python3Packages.buildPythonApplication {
   postPatch = ''
     substituteInPlace \
       setup.py \
-      --replace \
+      --replace-fail \
       'version=determine_version()' \
       'version="${version}"'
   '';

@@ -17,7 +17,7 @@ pkgs.python3Packages.buildPythonPackage rec {
   };
 
   postPatch = ''
-    substituteInPlace setup.py --replace "versioneer.get_version()" "'2.3.1'"
+    substituteInPlace setup.py --replace-fail "versioneer.get_version()" "'2.3.1'"
   '';
 
   propagatedBuildInputs = with pkgs.python3Packages; [

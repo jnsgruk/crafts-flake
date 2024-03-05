@@ -19,10 +19,10 @@ pkgs.python3Packages.buildPythonPackage rec {
 
   postPatch = ''
     substituteInPlace craft_cli/__init__.py \
-      --replace "dev" "${version}"
+      --replace-fail "dev" "${version}"
     
     substituteInPlace pyproject.toml \
-      --replace "setuptools==67.7.2" "setuptools"
+      --replace-fail "setuptools==67.7.2" "setuptools"
   '';
 
   propagatedBuildInputs = with pkgs.python3Packages; [
