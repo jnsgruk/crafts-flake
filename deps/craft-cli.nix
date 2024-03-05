@@ -4,7 +4,7 @@
 }:
 let
   pname = "craft-cli";
-  version = "2.5.0";
+  version = "2.5.1";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
@@ -14,7 +14,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     owner = "canonical";
     repo = pname;
     rev = version;
-    sha256 = "sha256-BcL3iYlA4pkyKZNRRmMSZLP3fgDcUQbW72k8yI6Y/VA=";
+    sha256 = "sha256-yEKF04OPu4paRrghAP78r9hu6cqkUy6z/V7cHNys82I=";
   };
 
   postPatch = ''
