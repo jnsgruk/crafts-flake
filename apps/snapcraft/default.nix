@@ -3,7 +3,7 @@
 , ...
 }:
 let
-  version = "8.0.3";
+  version = "8.0.4";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit version;
@@ -13,7 +13,7 @@ pkgs.python3Packages.buildPythonApplication {
     owner = "canonical";
     repo = "snapcraft";
     rev = "refs/tags/${version}";
-    sha256 = "sha256-d7zVKnYdundHGfBE9niE+7fSCqJZalpIZSzsqu45lCw=";
+    sha256 = "sha256-M2uhhUq3bZRfZKARU0qYoXdBj5br5nj+2rfGZ73QSLE=";
   };
 
   patches = [
