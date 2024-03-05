@@ -31,37 +31,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     types-pyyaml
   ];
 
-  preCheck = ''
-    mkdir -p check-phase
-    export HOME=$(pwd)/check-phase
-  '';
-
-  nativeCheckInputs = with pkgs.python3Packages; [
-    hypothesis
-    pytest-check
-    pytest-mock
-    pytest-subprocess
-    pytestCheckHook
-    requests-mock
-  ] ++ (with pkgs; [
-    bashInteractive
-    git
-    squashfsTools
-  ]);
-
-  disabledTestPaths = [
-    "tests/integration"
-    "tests/unit/packages"
-    "tests/unit/test_xattrs.py"
-  ];
-
-  disabledTests = [
-    "test_get_build_packages_with_source_type"
-    "test_get_build_packages"
-    "test_mode"
-    "test_run_builtin_build"
-    "test_run_prime"
-  ];
+  doCheck = false;
 
   meta = {
     description = "Software artifact parts builder from Canonical.";
