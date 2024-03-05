@@ -27,24 +27,23 @@ pkgs.python3Packages.buildPythonApplication {
   postPatch = ''
     substituteInPlace \
       setup.py \
-      --replace 'version=determine_version()' 'version="${version}"' \
-      --replace 'setuptools<66' 'setuptools' \
-      --replace 'jsonschema==2.5.1' 'jsonschema'
+      --replace-fail 'version=determine_version()' 'version="${version}"' \
+      --replace-fail 'jsonschema==2.5.1' 'jsonschema'
 
     substituteInPlace \
       snapcraft/__init__.py \
-      --replace '__version__ = _get_version()' '__version__ = "${version}"'
+      --replace-fail '__version__ = _get_version()' '__version__ = "${version}"'
 
     substituteInPlace \
       snapcraft_legacy/__init__.py \
-      --replace '__version__ = _get_version()' '__version__ = "${version}"'
+      --replace-fail '__version__ = _get_version()' '__version__ = "${version}"'
 
     substituteInPlace snapcraft/elf/elf_utils.py \
-      --replace 'linker_path = root_path / arch_config.dynamic_linker' \
+      --replace-fail 'linker_path = root_path / arch_config.dynamic_linker' \
                 'linker_path = Path("${pkgs.glibc}/lib/ld-linux-x86-64.so.2")'
       
     substituteInPlace tests/unit/linters/test_classic_linter.py \
-      --replace '"/lib/x86_64-linux-gnu/libdl.so.2"' '"${pkgs.glibc}/lib/libdl.so.2"'
+      --replace-fail '"/lib/x86_64-linux-gnu/libdl.so.2"' '"${pkgs.glibc}/lib/libdl.so.2"'
   '';
 
   buildInputs = with pkgs; [ makeWrapper ];

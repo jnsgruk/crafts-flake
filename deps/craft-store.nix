@@ -19,7 +19,7 @@ pkgs.python3Packages.buildPythonPackage rec {
 
   postPatch = ''
     substituteInPlace pyproject.toml \
-      --replace "setuptools==67.7.2" "setuptools"
+      --replace-fail "setuptools==67.7.2" "setuptools"
   '';
 
   propagatedBuildInputs = with pkgs.python3Packages; [

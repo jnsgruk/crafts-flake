@@ -16,11 +16,11 @@ pkgs.python3Packages.buildPythonPackage rec {
   };
 
   postPatch = ''
-    substituteInPlace src/pydantic_yaml/__init__.py \
-      --replace "0.0.0" "${version}"
+    substituteInPlace src/pydantic_yaml/version.py \
+      --replace-fail "0.0.0" "${version}"
     
     substituteInPlace pyproject.toml \
-      --replace "setuptools==67.7.2" "setuptools"
+      --replace-fail "setuptools >= 61.0.0" "setuptools"
   '';
 
   propagatedBuildInputs = with pkgs.python3Packages; [
