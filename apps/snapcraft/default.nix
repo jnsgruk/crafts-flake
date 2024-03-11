@@ -46,6 +46,7 @@ pkgs.python3Packages.buildPythonApplication {
 
   propagatedBuildInputs = with pkgs.python3Packages; [
     attrs
+    apt
     catkin-pkg
     click
     craft-archives
