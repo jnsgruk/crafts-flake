@@ -2,12 +2,14 @@
   description = "⭐craft applications and libraries flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-2311.url = "github:nixos/nixpkgs/nixos-23.11";
   };
 
   outputs =
     { self
-    , nixpkgs
+    , nixos-2311
+    , unstable
     , ...
     }:
     let
@@ -16,9 +18,9 @@
         # "aarch64-linux"
       ];
 
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      forAllSystems = unstable.lib.genAttrs supportedSystems;
 
-      pkgsForSystem = system: (import nixpkgs {
+      pkgsForSystem = system: (import unstable {
         inherit system;
         overlays = [ self.overlay ];
       });
@@ -26,7 +28,9 @@
     {
       overlay = final: prev: {
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
-          (_python-final: python_prev: {
+          (_python-final: python_prev: rec {
+            nixos2311pkgs = import nixos-2311 { inherit (final) system; };
+
             apt = final.callPackage ./deps/apt.nix { };
             catkin-pkg = final.callPackage ./deps/catkin-pkg.nix { };
             craft-application = final.callPackage ./deps/craft-application.nix { };
@@ -45,19 +49,10 @@
             types-deprecated = final.callPackage ./deps/types-deprecated.nix { };
 
             pydantic = python_prev.pydantic_1;
-
             # versioningit 2.2.1 migrated to pydantic 2, which is incompatible with the
-            # craft applications and libraries.
-            versioningit = python_prev.versioningit.overridePythonAttrs (_oldAttrs: rec {
-              version = "2.2.0";
-              src = prev.fetchFromGitHub {
-                owner = "jwodder";
-                repo = "versioningit";
-                rev = "refs/tags/v${version}";
-                hash = "sha256-sM5n02ewzysYNctXLamZHxJa+61D+xnYennprXjoiYc=";
-              };
-              doCheck = false;
-            });
+            # craft applications and libraries. NixOS 23.11 carries the correct version,
+            # so overlay it here.
+            inherit (nixos2311pkgs.python3Packages) versioningit;
           })
         ];
 
@@ -92,7 +87,7 @@
 
       # A minimal NixOS virtual machine which used for testing craft applications.
       nixosConfigurations = {
-        testvm = nixpkgs.lib.nixosSystem {
+        testvm = unstable.lib.nixosSystem {
           specialArgs = { flake = self; };
           modules = [ ./test/vm.nix ];
         };
