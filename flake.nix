@@ -27,6 +27,7 @@
       overlay = final: prev: {
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
           (_python-final: python_prev: {
+            apt = final.callPackage ./deps/apt.nix { };
             catkin-pkg = final.callPackage ./deps/catkin-pkg.nix { };
             craft-application = final.callPackage ./deps/craft-application.nix { };
             craft-archives = final.callPackage ./deps/craft-archives.nix { };
