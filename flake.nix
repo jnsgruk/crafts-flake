@@ -44,29 +44,11 @@
             spdx-lookup = final.callPackage ./deps/spdx-lookup.nix { };
             types-deprecated = final.callPackage ./deps/types-deprecated.nix { };
 
-            pydantic = python_prev.pydantic.overrideAttrs (_oldAttrs: rec {
-              version = "1.10.13";
-              pyproject = false;
-
-              src = prev.fetchFromGitHub {
-                owner = "pydantic";
-                repo = "pydantic";
-                rev = "refs/tags/v${version}";
-                hash = "sha256-ruDVcCLPVuwIkHOjYVuKOoP3hHHr7ItIY55Y6hUgR74=";
-              };
-
-              propagatedBuildInputs = with python_prev; [
-                setuptools
-                typing-extensions
-              ];
-              doCheck = false;
-              preCheck = false;
-              disabledTestPaths = false;
-            });
+            pydantic = python_prev.pydantic_1;
 
             # versioningit 2.2.1 migrated to pydantic 2, which is incompatible with the
             # craft applications and libraries.
-            versioningit = python_prev.versioningit.overrideAttrs (_oldAttrs: rec {
+            versioningit = python_prev.versioningit.overridePythonAttrs (_oldAttrs: rec {
               version = "2.2.0";
               src = prev.fetchFromGitHub {
                 owner = "jwodder";
