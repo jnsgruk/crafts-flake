@@ -14,6 +14,8 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-74cyet8+PEpMfY4G5Y9kdnENNGbs+1PEnvsICASnDvM=";
   };
 
+  doCheck = false;
+
   meta = {
     description = "Typing stubs for Deprecated.";
     homepage = "https://github.com/python/typeshed";

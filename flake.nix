@@ -59,7 +59,7 @@
                 setuptools
                 typing-extensions
               ];
-
+              doCheck = false;
               preCheck = false;
               disabledTestPaths = false;
             });
@@ -74,6 +74,7 @@
                 rev = "refs/tags/v${version}";
                 hash = "sha256-sM5n02ewzysYNctXLamZHxJa+61D+xnYennprXjoiYc=";
               };
+              doCheck = false;
             });
           })
         ];
