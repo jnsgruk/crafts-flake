@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 let
   pname = "craft-providers";
-  version = "1.23.0";
+  version = "1.23.1";
 in
 pkgs.python3Packages.buildPythonPackage rec {
   inherit pname version;
@@ -11,7 +11,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     owner = "canonical";
     repo = pname;
     rev = version;
-    sha256 = "sha256-9ZoNgpuGytwozRsw0wnS3d2UBOIsh3VI/uzB1RD2Zac=";
+    sha256 = "sha256-opVgOtbwZD+uQJ10Q8QlgQaS9KjRFnQ4h98Ak7Ze5qQ=";
   };
 
   patches = [
@@ -27,7 +27,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     # The urllib3 incompat: https://github.com/msabramo/requests-unixsocket/pull/69
     # This is already patched in nixpkgs.
     substituteInPlace pyproject.toml \
-      --replace-fail "setuptools==67.8.0" "setuptools" \
+      --replace-fail "setuptools==69.1.1" "setuptools" \
       --replace-fail "urllib3<2" "urllib3"
   '';
 
