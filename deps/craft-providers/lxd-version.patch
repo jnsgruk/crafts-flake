@@ -1,0 +1,13 @@
+diff --git a/craft_providers/lxd/lxd.py b/craft_providers/lxd/lxd.py
+index 696529b..9a8c17f 100644
+--- a/craft_providers/lxd/lxd.py
++++ b/craft_providers/lxd/lxd.py
+@@ -74,7 +74,7 @@ class LXD:
+         :returns: True if installed version is supported.
+         """
+         minimum_version = packaging.version.parse(self.minimum_required_version)
+-        version = self.version()
++        version = self.version().removesuffix(" LTS")
+ 
+         if "." not in version:
+             raise LXDError(

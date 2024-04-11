@@ -17,6 +17,7 @@ pkgs.python3Packages.buildPythonPackage rec {
   patches = [
     ./inject-snaps.patch
     ./lxd-socket-path.patch
+    ./lxd-version.patch
     ./python-submodules.patch
   ];
 
