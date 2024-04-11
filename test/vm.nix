@@ -1,4 +1,10 @@
-{ modulesPath, flake, pkgs, ... }: {
+{
+  modulesPath,
+  flake,
+  pkgs,
+  ...
+}:
+{
   imports = [ "${modulesPath}/virtualisation/qemu-vm.nix" ];
   system.stateVersion = "23.11";
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -6,7 +12,13 @@
 
   # These values are tuned such that the VM performs on Github Actions runners.
   virtualisation = {
-    forwardPorts = [{ from = "host"; host.port = 2222; guest.port = 22; }];
+    forwardPorts = [
+      {
+        from = "host";
+        host.port = 2222;
+        guest.port = 22;
+      }
+    ];
     cores = 2;
     memorySize = 5120;
     diskSize = 10240;
@@ -22,7 +34,13 @@
   environment.systemPackages = [
     (pkgs.writeShellApplication {
       name = "craft-test";
-      runtimeInputs = with pkgs; [ unixtools.xxd git snapcraft charmcraft rockcraft ];
+      runtimeInputs = with pkgs; [
+        unixtools.xxd
+        git
+        snapcraft
+        charmcraft
+        rockcraft
+      ];
       text = builtins.readFile ./craft-test;
     })
   ];

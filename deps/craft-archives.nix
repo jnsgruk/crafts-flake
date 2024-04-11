@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "craft-archives";
   version = "1.1.3";
@@ -20,12 +17,12 @@ pkgs.python3Packages.buildPythonPackage rec {
   postPatch = ''
     substituteInPlace craft_archives/__init__.py \
       --replace-fail "dev" "${version}"
-    
+
     substituteInPlace pyproject.toml \
       --replace-fail "setuptools==67.7.2" "setuptools"
   '';
 
-  propagatedBuildInputs = with pkgs.python3Packages;[
+  propagatedBuildInputs = with pkgs.python3Packages; [
     gnupg
     launchpadlib
     lazr-restfulclient

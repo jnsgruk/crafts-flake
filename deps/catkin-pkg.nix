@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "catkin-pkg";
   version = "0.5.2";
@@ -16,7 +13,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-DjaPpLDsLpYOZukf5tYe6ZetSNTe/DJ2lS9BUsehZ8k=";
   };
 
-  propagatedBuildInputs = with pkgs.python3Packages;[
+  propagatedBuildInputs = with pkgs.python3Packages; [
     docutils
     pyparsing
     python-dateutil

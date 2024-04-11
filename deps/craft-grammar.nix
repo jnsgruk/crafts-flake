@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "craft-grammar";
   version = "1.1.2";
@@ -16,9 +13,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-23KLIO2yHXGe/zb3B8LirJsh+LY9z0c5ZGtF392Kszo=";
   };
 
-  propagatedBuildInputs = with pkgs.python3Packages; [
-    overrides
-  ];
+  propagatedBuildInputs = with pkgs.python3Packages; [ overrides ];
 
   doCheck = false;
 

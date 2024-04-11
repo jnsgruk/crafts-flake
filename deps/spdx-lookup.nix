@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "spdx-lookup";
   version = "0.3.3";
@@ -14,9 +11,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-1B4I7Ou5pnIOix3/AptDgCydkp4G3LZIrqWLqT2PEl4=";
   };
 
-  propagatedBuildInputs = with pkgs.python3Packages; [
-    spdx
-  ];
+  propagatedBuildInputs = with pkgs.python3Packages; [ spdx ];
 
   doCheck = false;
 

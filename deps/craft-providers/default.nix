@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "craft-providers";
   version = "1.23.0";
@@ -26,7 +23,7 @@ pkgs.python3Packages.buildPythonPackage rec {
   postPatch = ''
     substituteInPlace craft_providers/__init__.py \
       --replace-fail "dev" "${version}"
-    
+
     # The urllib3 incompat: https://github.com/msabramo/requests-unixsocket/pull/69
     # This is already patched in nixpkgs.
     substituteInPlace pyproject.toml \

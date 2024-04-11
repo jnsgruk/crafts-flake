@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "craft-parts";
   version = "1.26.2";
@@ -16,11 +13,9 @@ pkgs.python3Packages.buildPythonPackage rec {
     sha256 = "sha256-wHv0JWffS916RK4Kgk+FuRthx+ajh0Ka4DBwGrLdUBs=";
   };
 
-  patches = [
-    ./bash-path.patch
-  ];
+  patches = [ ./bash-path.patch ];
 
-  propagatedBuildInputs = with pkgs.python3Packages;[
+  propagatedBuildInputs = with pkgs.python3Packages; [
     overrides
     pydantic
     pydantic-yaml

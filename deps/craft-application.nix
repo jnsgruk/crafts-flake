@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "craft-application";
   version = "1.2.1";
@@ -20,7 +17,7 @@ pkgs.python3Packages.buildPythonPackage rec {
   postPatch = ''
     substituteInPlace craft_application/__init__.py \
       --replace-fail "dev" "${version}"
-    
+
     substituteInPlace pyproject.toml \
       --replace-fail "setuptools==67.7.2" "setuptools"
   '';
@@ -48,4 +45,3 @@ pkgs.python3Packages.buildPythonPackage rec {
     maintainers = with lib.maintainers; [ jnsgruk ];
   };
 }
-

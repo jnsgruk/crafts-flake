@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "gnupg";
   version = "2.3.1";
@@ -20,9 +17,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     substituteInPlace setup.py --replace-fail "versioneer.get_version()" "'2.3.1'"
   '';
 
-  propagatedBuildInputs = with pkgs.python3Packages; [
-    psutil
-  ];
+  propagatedBuildInputs = with pkgs.python3Packages; [ psutil ];
 
   doCheck = false;
 

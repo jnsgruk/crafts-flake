@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "pydantic_yaml";
   version = "0.11.2";
@@ -18,7 +15,7 @@ pkgs.python3Packages.buildPythonPackage rec {
   postPatch = ''
     substituteInPlace src/pydantic_yaml/version.py \
       --replace-fail "0.0.0" "${version}"
-    
+
     substituteInPlace pyproject.toml \
       --replace-fail "setuptools >= 61.0.0" "setuptools"
   '';

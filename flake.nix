@@ -7,10 +7,11 @@
   };
 
   outputs =
-    { self
-    , nixos-2311
-    , unstable
-    , ...
+    {
+      self,
+      nixos-2311,
+      unstable,
+      ...
     }:
     let
       supportedSystems = [
@@ -20,10 +21,12 @@
 
       forAllSystems = unstable.lib.genAttrs supportedSystems;
 
-      pkgsForSystem = system: (import unstable {
-        inherit system;
-        overlays = [ self.overlay ];
-      });
+      pkgsForSystem =
+        system:
+        (import unstable {
+          inherit system;
+          overlays = [ self.overlay ];
+        });
     in
     {
       overlay = final: prev: {
@@ -82,13 +85,21 @@
       };
 
       packages = forAllSystems (system: {
-        inherit (pkgsForSystem system) charmcraft rockcraft snapcraft testVm testVmExec;
+        inherit (pkgsForSystem system)
+          charmcraft
+          rockcraft
+          snapcraft
+          testVm
+          testVmExec
+          ;
       });
 
       # A minimal NixOS virtual machine which used for testing craft applications.
       nixosConfigurations = {
         testvm = unstable.lib.nixosSystem {
-          specialArgs = { flake = self; };
+          specialArgs = {
+            flake = self;
+          };
           modules = [ ./test/vm.nix ];
         };
       };

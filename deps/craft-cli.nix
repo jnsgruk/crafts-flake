@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 let
   pname = "craft-cli";
   version = "2.5.1";
@@ -20,7 +17,7 @@ pkgs.python3Packages.buildPythonPackage rec {
   postPatch = ''
     substituteInPlace craft_cli/__init__.py \
       --replace-fail "dev" "${version}"
-    
+
     substituteInPlace pyproject.toml \
       --replace-fail "setuptools==67.7.2" "setuptools"
   '';
