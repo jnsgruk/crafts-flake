@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 let
-  version = "2.5.5";
+  version = "2.6.0";
 in
 pkgs.python3Packages.buildPythonApplication {
   inherit version;
@@ -10,7 +10,7 @@ pkgs.python3Packages.buildPythonApplication {
     owner = "canonical";
     repo = "charmcraft";
     rev = version;
-    hash = "sha256-MuHj7ZoOy/M4Paa9d+aywKwdpa7MTGETmPILizTlPzQ=";
+    hash = "sha256-B0ZcOORW6yaSIpisPLnq5/S/CcqqvHNTXcfP1sKW2KQ=";
   };
 
   postPatch = ''
