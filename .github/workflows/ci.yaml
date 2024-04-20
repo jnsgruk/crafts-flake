@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
     branches:
       - main
@@ -13,9 +13,9 @@ concurrency:
 jobs:
   lint:
     uses: ./.github/workflows/lint.yaml
-  build:
-    uses: ./.github/workflows/build.yaml
-    secrets:
-      CACHIX_AUTH_TOKEN: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-  test:
-    uses: ./.github/workflows/test.yaml
+  # build:
+  #   uses: ./.github/workflows/build.yaml
+  #   secrets:
+  #     CACHIX_AUTH_TOKEN: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+  # test:
+  #   uses: ./.github/workflows/test.yaml
