@@ -3,16 +3,10 @@
 
   inputs = {
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-2311.url = "github:nixos/nixpkgs/nixos-23.11";
   };
 
   outputs =
-    {
-      self,
-      nixos-2311,
-      unstable,
-      ...
-    }:
+    { self, unstable, ... }:
     let
       supportedSystems = [
         "x86_64-linux"
@@ -32,8 +26,6 @@
       overlay = final: prev: {
         pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
           (_python-final: python_prev: rec {
-            nixos2311pkgs = import nixos-2311 { inherit (final) system; };
-
             apt = final.callPackage ./deps/apt.nix { };
             catkin-pkg = final.callPackage ./deps/catkin-pkg.nix { };
             craft-application = final.callPackage ./deps/craft-application.nix { };
@@ -50,12 +42,7 @@
             spdx = final.callPackage ./deps/spdx.nix { };
             spdx-lookup = final.callPackage ./deps/spdx-lookup.nix { };
             types-deprecated = final.callPackage ./deps/types-deprecated.nix { };
-
             pydantic = python_prev.pydantic_1;
-            # versioningit 2.2.1 migrated to pydantic 2, which is incompatible with the
-            # craft applications and libraries. NixOS 23.11 carries the correct version,
-            # so overlay it here.
-            inherit (nixos2311pkgs.python3Packages) versioningit;
           })
         ];
 
@@ -70,9 +57,12 @@
 
         python3Packages = final.python3.pkgs;
 
-        charmcraft = final.callPackage ./apps/charmcraft { };
-        rockcraft = final.callPackage ./apps/rockcraft { };
-        snapcraft = final.callPackage ./apps/snapcraft { };
+        # charmcraft = final.callPackage ./apps/charmcraft { };
+        # rockcraft = final.callPackage ./apps/rockcraft { };
+        # snapcraft = final.callPackage ./apps/snapcraft { };
+        charmcraft = throw "crafts-flake is deprecated; charmcraft is now available in nixpkgs unstable.";
+        rockcraft = throw "crafts-flake is deprecated; rockcraft is now available in nixpkgs unstable.";
+        snapcraft = throw "crafts-flake is deprecated; snapcraft is now available in nixpkgs unstable.";
 
         # A virtual machine for integration testing the crafts
         testVm = self.nixosConfigurations.testvm.config.system.build.vm;
