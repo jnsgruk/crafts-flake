@@ -5,6 +5,13 @@
 
 A [nix](https://nixos.org/) flake for the [Canonical](https://canonical.com) ⭐craft suite of tools.
 
+> [!CAUTION]
+> This flake is now deprecated - `snapcraft`, `rockcraft` and `charmcraft` are now
+> available in upstream nixpkgs, and this repository is no longer maintained.
+>
+> The code remains in tact in case the approach is a useful reference in the future,
+> but attempting to install the packages will throw an error.
+
 ## Quick start
 
 The default package is charmcraft, which you can build/test with:
